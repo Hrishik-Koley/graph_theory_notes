@@ -1,0 +1,92 @@
+\documentclass[12pt,oneside]{book}
+%\usepackage[utf8]{inputenc}
+
+
+\usepackage{amssymb}
+\usepackage[french,english]{babel}
+
+\usepackage{setspace}
+\usepackage{amstext}
+% \theoremstyle{plain}\documentclass[10pt]{•}
+
+\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue,backref=page]{hyperref}
+%\usepackage{enumerate}
+
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{epsfig,listings}
+\usepackage{enumitem}
+%\usepackage[latin1]{inputenc}
+\usepackage{graphicx,graphics}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+%\usepackage{epsf}
+\usepackage{makeidx}
+\usepackage{amsmath,amsthm,array,multicol,verbatim,mathrsfs}
+%\usepackage{version}
+%\usepackage{times}
+%\usepackage{eucal}
+\usepackage{hyperref}
+%\usepackage[final]{pdfpages}
+%\usepackage{datetime2}
+
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+
+\usepackage[T1]{fontenc}
+\usepackage{cmbright}
+%\newcommand\mesheadings[1]{\textbf{#1}}
+%\FormatHeadingsWith{\mesheadings}
+%\setlength{\HeadRuleWidth}{0.4pt}
+
+\marginparwidth 1in
+
+\newtheorem*{thm*}{Theorem}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{rem}[thm]{\bf Remark}
+\newtheorem{defn}[thm]{\bf Definition}
+\newtheorem{ex}[thm]{\bf Example}
+\newtheorem{exe}[thm]{\bf Exercise}
+\newtheorem{exe*}[thm]{\bf Exercise*}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{exeA}[remark]{\bf Exercise(A)}
+\newtheorem{question}[thm]{\bf Question}
+\newtheorem{fact}[thm]{\bf Fact}
+
+\title{Basic Graph Theory}
+\author{Hrishik Koley, Bikram Halder}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\clearpage
+
+
+
+\setcounter{chapter}{-1}
+
+\mainmatter
+
+\input{chapter0}
+\input{chapter01}
+\input{chapter02}
+\input{chapter03}
+\input{chapter04}
+\input{chapter05}
+\input{chapter06}
+\input{chapter07}
+\input{chapter08}
+\input{exercises}
+\input{challenge_problems}
+\end{document}
