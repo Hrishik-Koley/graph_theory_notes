@@ -1,4 +1,5 @@
 \chapter{Basic Definitions}
+
 Some notation : $[n] = \{1,\ldots,n\}$, $V \times V$ the usual set product, $\binom{V}{2}$ denote unordered pairs of distinct elements in $V$. 
 %
 \begin{defn}(\index{Graph}Graph).  
@@ -112,3 +113,9 @@ Next, we go on to define few more types of graphs.
     \item A bipartite graph is defined as a graph whose vertices can be divided into two partite sets $X$ and $Y$, such that no two vertices in a partite set are adjacent to each other.
     \item A graph $H$ is called the subgraph of a graph $G$ if $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$.
 \end{enumerate}
+
+\begin{defn} [Graph homomorphism and isomorphism]
+    Suppose $G,H$ are two graphs. A function $\phi : V(G) \to V(H)$ is said to be a {\em graph homomorphism} if $x \sim y$ implies $\phi(x) \sim \phi(y).$ $\phi$ is said to be an {\em isomorphism} if $\phi$ is a bijection and $x \sim y$ iff $\phi(x) \sim \phi(y)$ i.e., $\phi, \phi^{-1}$ are graph homomorphisms. $G$ and $H$ are {\em isomorphic} ($G \cong H$) if there exists an isomorphism between $G$ and $H$. An {\em  automorphism} is an isomorphism $\phi :G \to G$.
+\end{defn}
+
+That's all the basic definitions we will be needing. Further on, we will be introducing various interesting ideas and in our Random Graphs WRP, these ideas will be of essesnce.
