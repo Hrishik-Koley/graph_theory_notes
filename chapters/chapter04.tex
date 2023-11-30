@@ -1,4 +1,12 @@
+\documentclass[../basic_graph_theory.tex]{subfiles}
+
+\begin{document}
 \chapter{Paths, Trails, Cycles, and Circuits}
+\addcontentsline{toc}{chapter}{Paths, Trails, Cycles, and Circuits} %Set chapter title
+\setcounter{chapter}{4} %Set chapter counter
+\setcounter{section}{4}
+\setcounter{equation}{4}
+\setcounter{figure}{4}
 
 We start off this chapter by including some definitions. It would help you all to recall the definitions of paths, walks, and trails.
 
@@ -31,8 +39,8 @@ We start off this chapter by including some definitions. It would help you all t
     For a connected graph $G$, TFAE (the following are equivalent) :
     \begin{enumerate}
         \item[(i)] $G$ is Eulerian.
-        \item[(ii)] Every vertex of $G$ has even degree. 
-        \item[(iii)] The edges of $G$ can be partitioned into edge-disjoint cycles.  
+        \item[(ii)] Every vertex of $G$ has even degree.
+        \item[(iii)] The edges of $G$ can be partitioned into edge-disjoint cycles.
     \end{enumerate}
 \end{thm}
 The proof of this theorem is intuitive and are left as an exercise for the reader. It will be nice if you try to prove part (iii) and you can send your proofs on the group.
@@ -57,15 +65,15 @@ The proof of this theorem is left as an exercise to the reader. You can make use
 Next, we define some very useful terminologies that will be of essence.\\
 
 \begin{defn}[Independent sets and covers] \index{independent sets} \index{cover}
-    An {\em independent set of vertices} is $S \subset V$ such that no two vertices in $S$ are adjacent. An {\em independent set of edges} is $E' \subset E$ such that no two edges in $E'$ share a common end vertex. A subset of vertices $S \subset V$ is a {\em vertex cover} if every edge in $G$ is incident to at least one vertex in $S$. An {\em edge cover} is a set of edges $E' \subset E$ such that every vertex is contained in at least one edge in $E'$. 
+    An {\em independent set of vertices} is $S \subset V$ such that no two vertices in $S$ are adjacent. An {\em independent set of edges} is $E' \subset E$ such that no two edges in $E'$ share a common end vertex. A subset of vertices $S \subset V$ is a {\em vertex cover} if every edge in $G$ is incident to at least one vertex in $S$. An {\em edge cover} is a set of edges $E' \subset E$ such that every vertex is contained in at least one edge in $E'$.
 \end{defn}
 \begin{defn}[Independence number and cover number]
     %
     \begin{eqnarray*}
-    \alpha(G) & = & \max \{|S| : S \, \mbox{independent vertex set} \}. \\
-    \alpha'(G) & = & \max \{|M| : M \, \mbox{independent edge set} \}. \\
-    \beta(G) & = & \min \{|S| : S \, \mbox{vertex cover} \}.  \\
-    \beta'(G) & = & \min \{|E'| : E' \, \mbox{edge cover} \}. 
+        \alpha(G) & = & \max \{|S| : S \, \mbox{independent vertex set} \}. \\
+        \alpha'(G) & = & \max \{|M| : M \, \mbox{independent edge set} \}. \\
+        \beta(G) & = & \min \{|S| : S \, \mbox{vertex cover} \}.  \\
+        \beta'(G) & = & \min \{|E'| : E' \, \mbox{edge cover} \}.
     \end{eqnarray*}
 \end{defn}
 
@@ -83,19 +91,19 @@ You can skip the proof of this theorem if you want, as the proof would not be a 
     Following these, we can make some observations:\\
     \begin{enumerate}
         \item[(i)] It must be that $r \ge \kappa(G)$. If the vertices $V(C)$ were removed from $G$, then $H$ would be disconnected from the rest of the graph. Since $\kappa(G)$ is the size of the smallest cut set, it follows that $r \ge \kappa(G) \ge 2$.
-        \item[(ii)] No two of the vertices in the set $V(C)$ are consecutive vertices on $C$. To see this, suppose that there is some $i$ such that $c_i$ and $c_{i+1}$ are consecutive vertices on $C$. Let, $P$ be a path from $h_i$ to $h_{i+1}$ in $H$, and consider the cycle formed by replacing the edge $c_ic_{i+1}$ on $C$ with the path $c_i, [h_i, h_{i+1}]_{P} , c_{i+1}$. This cycle is longer than our maximal cycle $C$, a contradiction. This observation implies that the sets ${c_1, c_2,\dots,c_r}$ and ${d_1, d_2,\dots,d_r}$ are disjoint. 
-        \item[(iii)] For each $i (1 \le i \le r)$, $d_i$ is not adjacent to $v$. To see this, suppose $d_{i}v \in E(G)$ for some $i$, and let $Q$ be a path from $h_i$ to $v$ in $H$. In this case, the cycle formed by replacing the edge $c_{i}d_{i}$ on $C$ with the path $c_{i}, [h_{i}, v]_{Q}, d_{i}$ is longer than $C$, again a contradiction. 
+        \item[(ii)] No two of the vertices in the set $V(C)$ are consecutive vertices on $C$. To see this, suppose that there is some $i$ such that $c_i$ and $c_{i+1}$ are consecutive vertices on $C$. Let, $P$ be a path from $h_i$ to $h_{i+1}$ in $H$, and consider the cycle formed by replacing the edge $c_ic_{i+1}$ on $C$ with the path $c_i, [h_i, h_{i+1}]_{P} , c_{i+1}$. This cycle is longer than our maximal cycle $C$, a contradiction. This observation implies that the sets ${c_1, c_2,\dots,c_r}$ and ${d_1, d_2,\dots,d_r}$ are disjoint.
+        \item[(iii)] For each $i (1 \le i \le r)$, $d_i$ is not adjacent to $v$. To see this, suppose $d_{i}v \in E(G)$ for some $i$, and let $Q$ be a path from $h_i$ to $v$ in $H$. In this case, the cycle formed by replacing the edge $c_{i}d_{i}$ on $C$ with the path $c_{i}, [h_{i}, v]_{Q}, d_{i}$ is longer than $C$, again a contradiction.
     \end{enumerate}
     Now, let $S = {v,d_1, d_2,...,d_r}$. The first observation above implies that $|S| \ge \kappa(G)+1 > \alpha(G)$. This means that some pair of vertices in $S$ must be adjacent. Our third observation implies that $d_i$ must be adjacent to $d_j$ for some $i<j$. If $R$ is a path from $h_i$ to $h_j$ in $H$, then the cycle $c_i, [h_i, h_j]_{R}, [c_j , d_i]_{C^-} , [dj , ci]_{C^+}$ is a longer cycle than $C$. Our assumption that $C$ was not a Hamiltonian cycle has led to a contradiction and thus, $C$ is indeed a Hamiltonian cycle.
 \end{proof}
 
-Next, we introduce the idea of forbidden subgraphs. The absence of any particular forbidden subgraph $H$ in a graph $G$, gives $G$ some \say{nice} properties. This concept of forbidden subgraphs will be very crucial in understanding and checking for planarity of graphs. Here, we will relate forbidden subgraphs to Hamiltonicity. For the next two theorems, you may skip the proofs if you wish.
+Next, we introduce the idea of forbidden subgraphs. The absence of any particular forbidden subgraph $H$ in a graph $G$, gives $G$ some ``nice'' properties. This concept of forbidden subgraphs will be very crucial in understanding and checking for planarity of graphs. Here, we will relate forbidden subgraphs to Hamiltonicity. For the next two theorems, you may skip the proofs if you wish.
 
 \begin{thm}
     If $G$ is a $2$-connected, $\{K_{1,3}, Z_{1}\}$-free graph, then $G$ is Hamiltonian
 \end{thm}
 \begin{proof}
-    Suppose $G$ is $2$-connected and ${K_{1,3}, Z_1}$-free, and let $C$ be a longest cycle in $G$. If $C$ is not a Hamiltonian cycle, then there must exist a vertex $v$, not on $C$, which is adjacent to a vertex, say $w$, on $C$. Let $a$ and $b$ be the immediate predecessor and successor of $w$ on $C$.\\ 
+    Suppose $G$ is $2$-connected and ${K_{1,3}, Z_1}$-free, and let $C$ be a longest cycle in $G$. If $C$ is not a Hamiltonian cycle, then there must exist a vertex $v$, not on $C$, which is adjacent to a vertex, say $w$, on $C$. Let $a$ and $b$ be the immediate predecessor and successor of $w$ on $C$.\\
     A longer cycle would exist if either $a$ or $b$ were adjacent to $v$, and so it must be that both $a$ and $b$ are nonadjacent to $v$. Now, if $a$ is not adjacent to $b$, then the subgraph induced by the vertices ${w,v,a,b}$ is $K_{1,3}$, and we know that $G$ is $K_{1,3}$-free. So it must be that $ab \in E(G)$. But if this is the case, then the subgraph induced by ${w,v,a,b}$ is $Z_1$, a contradiction. Therefore, it must be that $C$ is a Hamiltonian cycle.
 \end{proof}
 
@@ -109,16 +117,18 @@ Next, we introduce the idea of forbidden subgraphs. The absence of any particula
 
 The proof of the second part follows directly from theorem 4.0.14. The proof of the first part is also simple and the only obstacle that may arise is understanding what we mean by traceable. A traceable graph refers to a graph that has a Hamiltonian path.
 \begin{figure}[htbp]
-    \tikzset{every picture/.style={line width=0.75pt}} 
+    \tikzset{every picture/.style={line width=0.75pt}}
     \begin{center}
         \begin{tikzpicture}[x=0.65pt,y=0.65pt,yscale=-0.5,xscale=0.5]
-            \draw    (326,92) -- (399,202.41) ; 
+            \draw    (326,92) -- (399,202.41) ;
             \draw    (326,92) -- (254,202.41) ;
             \draw    (254,202.41) -- (399,202.41) ;
-            \draw    (327,18.41) -- (326,92) ; 
-            \draw    (474,249.41) -- (399,202.41) ; 
+            \draw    (327,18.41) -- (326,92) ;
+            \draw    (474,249.41) -- (399,202.41) ;
             \draw    (182,246.41) -- (254,202.41) ;
         \end{tikzpicture}
     \end{center}
     \caption{This graph is represented by \textbf{N}}
 \end{figure}
+
+\end{document}
