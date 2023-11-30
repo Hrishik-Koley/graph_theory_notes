@@ -7,5 +7,64 @@
 \setcounter{equation}{7}
 \setcounter{figure}{7}
 
+Given a graph $G$ and a positive integer $k$, a $k$-coloring is a function $K : V (G) \to \{1,...,k\}$ from the vertex set into the set of positive integers less than or equal to $k$. If we think of the latter set as a set of $k$ “colors,” then $K$ is an assignment of one color to each vertex. We say that $K$ is a proper $k$-coloring of $G$ if for every pair $u,v$ of adjacent vertices, $K(u) \neq K(v)$. If such a coloring exists for a graph $G$, we say that $G$ is $k$-colorable. Given a graph $G$, the chromatic number of $G$, denoted by $\chi(G)$, is the smallest integer $k$, such that, $G$ is k-colorable.\\
+We first look at the chromatic numbers of some basic graphs.\\
+$\chi(C_n)=2$ if $n=$even and $\chi(C_n)=3$ if $n=$odd\\
+$\chi(K_n)=n$ and $\chi(K_{m,n})=2$\\
+$\chi(P_n)=2$ if $n \ge 2$ and $\chi(P_n)=1$ if $n=1$\\
 
+\begin{thm}
+    For any graph $G$ of order $n$, $\chi(G) \le n$. 
+\end{thm}
+The proof of the theorem is intuitive and is left as an exercise for the reader.\\
+Before moving forward, we want to point out what is famously known as the greedy algorithm. It can be used to prove several theorems related to coloring.\\
+\\
+\textbf{\em{Greedy algorithm}}
+\begin{enumerate}
+    \item[(i)] Mark all the vertices as $V=\{v_1, v_2, \dots, v_n\}$.
+    \item[(ii)] Next, order the available colors in some way. We will denote them by the positive integers $1,2,\dots,n$. Then start coloring by assigning color $1$ to vertex $v_1$. Next, if $v_1$ and $v_2$ are adjacent, assign color $2$ to vertex $v_2$; otherwise, use color $1$ again. In general, to color vertex $v_i$, use the first available color that has not been used for any of $v_i$'s previously colored neighbors.
+\end{enumerate}
+
+\begin{thm}
+    For any graph $G$, $\chi(G) \le \Delta(G)+1$.
+\end{thm}
+\begin{proof}
+    Greedy algorithm uses at most $\Delta(G)+1$ colors as every vertex in the graph is adjacent to atmost $\Delta(G)$ other vertices, and hence the largest color label used is at most $\Delta(G)+1$. The equality in the theorem holds only for complete graph and odd cycles.
+\end{proof}
+Next, we go on to state Brooks's theorem. The proof of the theorem is significantly long and not important for the WRP. So, you are free to skip the proof.\\
+\begin{thm}[Brooks's theorem]
+    If $G$ is a connected graph that is neither an odd cycle nor a complete graph, then $\chi(G) \le \Delta(G)$.
+\end{thm}
+\begin{proof}
+    
+\end{proof}
+The next bound involves a new concept.\\
+\begin{defn}
+    The clique number of a graph, denoted by $\omega(G)$, is defined as the order of the largest complete graph that is a subgraph of $G$.
+\end{defn}
+We will be stating the following two bounds on chromatic numbers without proof. The reader is urged to try to prove the theorems by themselves.\\
+\begin{thm}
+    For any graph $G$, $\chi(G) \ge \omega(G)$.
+\end{thm}
+\begin{thm}
+    For any graph $G$ on $n$ vertices, $\frac{n}{\alpha(G)} \le \chi(G) \le n+1-\alpha(G)$.
+\end{thm}
+Next, we will be stating the five-color theorem.\\
+\begin{thm}[Five Color theorem]
+    Every planar graph is $5$-colorable.
+\end{thm}
+\begin{proof}
+    We induct on the order of $G$. Let $G$ be a planar graph of order $n$. If $n \le 5$, then the result is clear. So suppose that $n \ge 6$ and that the result is true for all planar graphs of order $n - 1$. We know that G contains a vertex, say $v$, having $deg(v) \le 5$ (as every planar graph has $\delta(G) \le 5$).\\
+    Consider the graph $G'$ obtained by removing from $G$ the vertex $v$ and all edges incident with $v$. Since the order of $G'$ is $n - 1$ (and since $G'$ is of course planar), we can apply the induction hypothesis and conclude that $G'$ is $5$-colorable. Now, we can assume that $G'$ has been colored using the five colors, named $1,2,3,4,$ and $5$. Consider now the neighbors of $v$ in $G$. As noted earlier, $v$ has at most five neighbors in $G$, and all of these neighbors are vertices in (the already colored) $G'$.\\
+    If in $G'$ fewer than five colors were used to color these neighbors, then we can properly color $G$ by using the coloring for $G'$ on all vertices other than $v$, and by coloring $v$ with one of the colors that is not used on the neighbors of $v$. In doing this, we have produced a $5$-coloring for $G$.\\
+    So, assume that in $G$ exactly five of the colors were used to color the neighbors of $v$. This implies that there are exactly five neighbors, call them $w_1, w_2, w_3, w_4, w_5,$ and assume without loss of generality that each wi is colored with color $i$.\\
+    We wish to rearrange the colors of $G$ so that we make a color available for $v$. Consider all of the vertices of $G$ that have been colored with color $1$ or with color $3$.\\
+    \em{Case 1.} Suppose that in $G$ there does not exist a path from $w_1$ to $w_3$ where all of the colors on the path are $1$ or $3$. Define a subgraph $H$ of $G$ to be the union of all paths that start at $w_1$ and that are colored with either $1$ or $3$. Note that $w_3$ is not a vertex of $H$ and that none of the neighbors of $w_3$ are in $H$. Now, interchange the colors in $H$. That is, change all of the $1$'s into $3$'s and all of the $3$'s into $1$'s. The resulting coloring of the vertices of $G$ is a proper coloring, because no problems could have possibly arisen in this interchange. We now see that $w_1$ is colored $3$, and thus color $1$ is available to use for $v$. Thus, $G$ is $5$-colorable.\\
+    \em{Case 2.} Suppose that in $G$ there does exist a path from $w_1$ to $w_3$ where all of the colors on the path are $1$ or $3$. Call this path $P$. Note now that $P$ along with $v$ forms a cycle that encloses either $w_2$ or $w_4$. So there does not exist a path from $w_2$ to $w_4$ where all of the colors on the path are $2$ or $4$. Thus, the reasoning in \em{Case 1} applies. We conclude that $G$ is $5$-colorable.
+\end{proof}
+
+Following this, we now state the four-color theorem. We won't be including the proof for very obvious reasons. But rest assured it is no more a conjecture and has been proven.
+\begin{thm}[Four Color theorem]
+    Every planar graph is $4$-colorable.
+\end{thm}
 \end{document}
