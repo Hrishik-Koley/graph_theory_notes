@@ -27,18 +27,20 @@
 \date{}
 
 \begin{document}
+\pagestyle{empty}
 
+\frontmatter
+
+\pagestyle{plain}
 \maketitle
 
 \tableofcontents
 \clearpage
 
 
-
-% \setcounter{chapter}{-1}
-
 \mainmatter
 
+\setcounter{chapter}{-1}
 \subfile{./chapters/chapter0}
 \subfile{./chapters/chapter01}
 \subfile{./chapters/chapter02}
@@ -50,4 +52,8 @@
 \subfile{./chapters/chapter08}
 \subfile{./chapters/exercises}
 \subfile{./chapters/challenge_problems}
+
+\backmatter
+
+
 \end{document}
