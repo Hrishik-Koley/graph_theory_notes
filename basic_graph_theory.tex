@@ -1,50 +1,8 @@
-\documentclass[12pt,oneside]{book}
-%\usepackage[utf8]{inputenc}
+\documentclass[twoside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{style}
+\usepackage{subfiles}
 
-
-\usepackage{amssymb}
-\usepackage[french,english]{babel}
-
-\usepackage{setspace}
-\usepackage{amstext}
-% \theoremstyle{plain}\documentclass[10pt]{•}
-
-\RequirePackage[colorlinks,citecolor=blue,urlcolor=blue,backref=page]{hyperref}
-%\usepackage{enumerate}
-
-\usepackage{latexsym}
-\usepackage{dirtytalk}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{algorithm2e}
-\usepackage{algpseudocode}
-\usepackage{epsfig,listings}
-\usepackage{enumitem}
-%\usepackage[latin1]{inputenc}
-\usepackage{graphicx,graphics}
-\usepackage{tikz}
-\usepackage{tkz-graph}
-%\usepackage{epsf}
-\usepackage{makeidx}
-\usepackage{amsmath,amsthm,array,multicol,verbatim,mathrsfs}
-%\usepackage{version}
-%\usepackage{times}
-%\usepackage{eucal}
-\usepackage{hyperref}
-%\usepackage[final]{pdfpages}
-%\usepackage{datetime2}
-
-\usepackage{fancyhdr}
-\usepackage{mathtools}
-
-\usepackage[T1]{fontenc}
-\usepackage{cmbright}
-%\newcommand\mesheadings[1]{\textbf{#1}}
-%\FormatHeadingsWith{\mesheadings}
-%\setlength{\HeadRuleWidth}{0.4pt}
-
-\marginparwidth 1in
 
 \newtheorem*{thm*}{Theorem}
 \newtheorem{thm}{Theorem}[section]
@@ -67,27 +25,33 @@
 \date{}
 
 \begin{document}
+\pagestyle{empty}
 
+\frontmatter
+
+\pagestyle{plain}
 \maketitle
 
 \tableofcontents
 \clearpage
 
 
-
-\setcounter{chapter}{-1}
-
 \mainmatter
 
-\input{chapter0}
-\input{chapter01}
-\input{chapter02}
-\input{chapter03}
-\input{chapter04}
-\input{chapter05}
-\input{chapter06}
-\input{chapter07}
-\input{chapter08}
-\input{exercises}
-\input{challenge_problems}
+\setcounter{chapter}{-1}
+\subfile{./chapters/chapter00}
+\subfile{./chapters/chapter01}
+\subfile{./chapters/chapter02}
+\subfile{./chapters/chapter03}
+\subfile{./chapters/chapter04}
+\subfile{./chapters/chapter05}
+\subfile{./chapters/chapter06}
+\subfile{./chapters/chapter07}
+\subfile{./chapters/chapter08}
+\subfile{./chapters/exercises}
+\subfile{./chapters/challenge_problems}
+
+\backmatter
+
+
 \end{document}
