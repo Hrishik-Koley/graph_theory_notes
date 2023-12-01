@@ -3,50 +3,52 @@
 \begin{document}
 \chapter{Trees}
 \setcounter{chapter}{3} %Set chapter counter
-\setcounter{section}{3}
+\setcounter{section}{0}
 \setcounter{equation}{3}
 \setcounter{figure}{3}
 
+\section{Basics of Trees and Forests}
 A tree is a connected graph that contains no cycles. Graph-theoretic trees do not have cycles. A forest is a collection of one or more trees. A vertex of degree $1$ in a tree is called a leaf.\\
 As in nature, graph-theoretic trees come in many shapes and sizes. They can be thin $(P_{10})$ or thick $(K_{1,1000})$, tall $(P_{1000})$ or short $(K_{1}$ and $K_{2})$. You can check out how these graphs look by looking them up on google.\\
 There are some interesting names that can be assigned to certain graphs. Such as, $K_{1}$ is called a stump and $K_{2}$ is called a twig. Similarly, any $K_{1,3}$ graph is called a claw. There are more graphs, which have been assigned such interesting names, and the list is just a web search away from you.
-\begin{thm}
+\begin{Thm}{}{}
     A tree $T$ of order $n$ has $(n-1)$ edges.
-\end{thm}
+\end{Thm}{}{}
 \begin{proof}
     We use induction to prove this theorem.\\
     Base Case: For $n=1$ the only tree is the stump $(K_{1})$, and it of course has $0$ edges.\\
     Induction Hypothesis:  Assume that the result is true for all trees of order less than $k$.\\
     Inductive Step: Let, $T$ be a tree of order $k$. Choose some edge of $T$ and call it $e$. Since $T$ is a tree, it must be that $T-e$ is disconnected with two connected components that are trees themselves. Say that these two components of $T-e$ are $T_{1}$ and $T_{2}$, with orders $k_{1}$ and $k_{2}$, respectively. Thus, $k_{1}$ and $k_{2}$ are less than $n$ and $k_{1} + k_{2} = k$.\\
-    Since $k_{1} < k$, the theorem is true for $T_{1}$. Thus $T_{1}$ has $k_{1}-1$ edges. Similarly, $T_{2}$ has $k_{2}-1$ edges. Now, since $E(T)$ is the disjoint union of $E(T1)$, $E(T2)$, and $\{e\}$, we have $|E(T)|=(k_{1}-1) + (k_{2}-1) + 1 = k_{1} + k_{2} - 1 = k-1$.\\
+    Since $k_{1} < k$, the theorem is true for $T_{1}$. Thus $T_{1}$ has $k_{1}-1$ edges. Similarly, $T_{2}$ has $k_{2}-1$ edges. Now, since $E(T)$ is the disjoint union of $E(T_1)$, $E(T_2)$, and $\{e\}$, we have $|E(T)|=(k_{1}-1) + (k_{2}-1) + 1 = k_{1} + k_{2} - 1 = k-1$.\\
     Hence, a tree $T$ of order $n$ has (n-1) edges.
 \end{proof}
 
 The next two theorems can be trivially proved by using the idea of the preceding theorem and so are left as an exercise for the reader. But before stating them we need to define some terminology.
 
-\begin{defn}
-    The numbe rof connected components in a graph is represented by $\beta_{0}(G)$.
-\end{defn}
+\begin{Def}{Number of connected components}{}
+    The numbe of connected components in a graph is represented by $\beta_{0}(G)$.
+\end{Def}
 
-\begin{thm}
+\begin{Thm}{}{}
     If $F$ is a forest of order $n$, then $F$ has $(n-\beta_{0}(G))$ edges.
-\end{thm}
+\end{Thm}{}{}
 
-\begin{thm}
+\begin{Thm}{}{}
     \label{ref:2}
     A graph of order $n$ is a tree iff it is connected and contains $(n-1)$ edges.
-\end{thm}
+\end{Thm}{}{}
 
-\begin{thm}
+\begin{Thm}{}{}
     If $T$ is a tree of order $n \ge 2$, then $T$ has atleast two leaves.
-\end{thm}
+\end{Thm}{}{}
 \begin{proof}
     Readers can use theorem \ref{ref:3} and theorem \ref{ref:2} to prove this.
 \end{proof}
 
-\begin{thm}
+\section{Subgraph of Trees or Trees as Subgraphs}
+\begin{Thm}{}{}
     In any tree, the center is either a single vertex or a pair of adjacent vertices.
-\end{thm}
+\end{Thm}{}{}
 \begin{proof}
     Given a tree $T$, we form a sequence of trees as follows. Let $T_0 = T$. Let, $T_1$ be the graph obtained from $T_0$ by deleting all of its leaves. Note here that $T_1$ is also a tree. Let, $T_2$ be the tree obtained from $T_1$ by deleting all of the leaves of $T_1$. In general, for as long as it is possible, let $T_j$ be the tree obtained by deleting all of the leaves of $T_{j-1}$. Since $T$ is finite, there must be an integer $r$ such that $T_r$ is either $K_1$ or $K_2$.\\
     Consider now a consecutive pair $T_i$, $T_{i+1}$ of trees from the sequence $T=T_0, T_1,..., T_r$. Let, $v$ be a non-leaf of $T_i$. In $T_i$, the vertices that are at the greatest distance from $v$ are leaves of $T_i$. This means that the eccentricity of $v$ in $T_{i+1}$ is one less than the eccentricity of $v$ in $T_i$. Since this is true for all non-leaves of $T_i$, it must be that the center of $T_{i+1}$ is exactly the same as the center of $T_i$.\\
@@ -55,21 +57,21 @@ The next two theorems can be trivially proved by using the idea of the preceding
 
 We will now add consider trees as subgraphs of graphs, that may or may not be trees.
 
-\begin{thm}
+\begin{Thm}{}{}
     Let $T$ be a tree with $k$ edges. If $G$ is a graph whose minimum degree satisfies $\delta(G) \ge k$, then $G$ contains $T$ as a subgraph. Alternatively, $G$ contains every tree of order at most $\delta(G)+1$ as a subgraph.
-\end{thm}
+\end{Thm}{}{}
 \begin{proof}
     We induct on $k$. If $k=0$, then $T=K_{1}$, and it is clear that $K_{1}$ is a subgraph of any graph. Further, if $k=1$, then $T=K_{2}$, and $K_{2}$ is a subgraph of any graph whose minimum degree is $1$. Assume that the result is true for all trees with $k-1$ edges $(k \ge 2)$, and consider a tree $T$ with exactly $k$ edges. We know that $T$ contains at least two leaves. Let, $v$ be one of them, and let, $w$ be the vertex that is adjacent to $v$. Consider the graph $T-v$. Since $T-v$ has $k-1$ edges, the induction hypothesis applies, so $T-v$ is a subgraph of $G$.\\
     We can think of $T-v$ as actually sitting inside of $G$. Now, since $G$ contains at least $k+1$ vertices and $T-v$ contains $k$ vertices, there exist vertices of $G$ that are not a part of the subgraph $T-v$. Further, since the degree in $G$ of $w$ is at least $k$, there must be a vertex $u$ not in $T-v$ that is adjacent to $w$. The subgraph $T-v$ together with $u$ forms the tree $T$ as a subgraph of $G$.
 \end{proof}
 
-\begin{defn}
+\begin{Def}{Spanning Tree}{}
     Given a graph $G$, and a subgraph $T$, we say that $T$ is a spanning tree of $G$, if $T$ is a tree that contains every vertex of $G$.
-\end{defn}
+\end{Def}
 
-\begin{thm}[Cayley's Tree formula]
+\begin{Thm}{Cayley's Tree formula}{}
     There are $n^{n-2}$ distinct labeled trees of order $n$.
-\end{thm}
+\end{Thm}{}{}
 
 %The next parts of this chapter are not required for the Random Graphs WRP.
 
