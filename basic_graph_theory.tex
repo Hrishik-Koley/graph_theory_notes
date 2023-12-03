@@ -3,6 +3,7 @@
 \usepackage{style}
 \usepackage{subfiles}
 
+\makeindex[columns=2, title=Index, intoc, options= -s index_style.ist]
 
 \newtheorem*{thm*}{Theorem}
 \newtheorem{thm}{Theorem}[section]
@@ -38,7 +39,6 @@
 
 \mainmatter
 
-\setcounter{chapter}{-1}
 \subfile{chapters/chapter00}
 \subfile{chapters/chapter01}
 \subfile{chapters/chapter02}
@@ -53,5 +53,11 @@
 
 \backmatter
 
+\pagestyle{plain}
+{\footnotesize
+  \cleardoublepage
+  \printindex\label{index}
+  \clearpage
+}
 
 \end{document}

@@ -8,92 +8,99 @@
 \setcounter{figure}{0}
 
 \section{Basic Ideas}
-Distance in graphs are a very important concepts, especially, in respect to real-world networks. Distance functions can be defined as metrics. Some of the defining properties of metric $M$ are:
-\begin{itemize}
-    \item $M(x,y) \ge 0$ $\forall x,y$ and $M(x,y)=0$ iff $x=y$
-    \item $M(x,y)=M(y,x)$ $\forall x,y$
-    \item $M(x,y) \le M(x,z)+M(z,y)$ $\forall x,y,z$
-\end{itemize}
+Distance in graphs are a very important concepts, especially, in respect to real-world networks. Distance functions can be defined as metrics.
+
+\begin{Def}{Metric}{}
+  A metric on a set $X$ is a function $d:X \times X \rightarrow \R$, such that, for all $x,y,z \in X$,
+  \begin{enumerate}
+    \item $d(x,y) \ge 0$ and $d(x,y)=0$ if and only if $x=y$.
+    \item $d(x,y)=d(y,x)$
+    \item $d(x,z) \le d(x,y)+d(y,z)$
+  \end{enumerate}
+\end{Def}
 
 Before talking more about distances in graphs, we need to know what a path is. Understanding what a path is, makes it easier for us to discuss the distance between any two vertices in a graph.
 
-\begin{Def}{Walk}{}
-    A walk in a graph is a sequence of vertices $v_1, v_2,\cdots, v_k$, which are not necessarily distinct, such that $v_iv_{i+1} \in E(G)$.
+\begin{Def}{Walk}{walk}
+  A walk in a graph is a sequence of vertices $v_1, v_2,\cdots, v_k$, which are not necessarily distinct, such that $\left\{ v_i, v_{i+1} \right\} \in E(G)$.
 \end{Def}
 
-\begin{Def}{Path}{}
-    A path is defined as a walk, where the vertices in the walk are distinct.
+\begin{Def}{Path}{path}
+  A path is a walk, where the vertices are distinct.
 \end{Def}
 
 As we have already defined what walks and paths are, it would not harm us to define trails too.
 
-\begin{Def}{Trail}{}
-    A trail is defined as a walk, where the edges in the walk are distinct.
+\begin{Def}{Trail}{trail}
+  A trail is a walk, where the edges are distinct.
 \end{Def}
 
-We state a theorem that states the relation between a path and a trail. The proof is intuitive and we urge you all to figure it out by yourself.
+We state a theorem that gives the relation between a path and a trail.
 
-\begin{Thm}{}{}
-    Every path is a trail but not every trail is a path.
-\end{Thm}{}{}
+\begin{Thm}{}{path:trail}
+  Every path is a trail but not every trail is a path.
+\end{Thm}
+\begin{proof}
+  Easy exercise.
+\end{proof}
 
 In a connected graph $G$, the distance from vertex $u$ to vertex $v$ is the length (number of edges) of a shortest $uv$ path in $G$. We denote this distance by $d(u,v)$, and in situations where clarity of context is important, we may write $d_G(u,v)$.
-For a given vertex $v$ of a connected graph, the eccentricity of $v$, denoted $ecc(v)$, is defined to be the greatest distance from $v$ to any other vertex. That is,\\
+For a given vertex $v$ of a connected graph, the eccentricity of $v$, denoted $\ecc(v)$, is defined to be the greatest distance from $v$ to any other vertex. That is,
 \[
-    ecc(v) = \max \left\{ d(v,x) \mid x \in V(G) \right\}
+  \ecc(v) = \max \left\{ d(v,x) \mid x \in V(G) \right\}
 \]
 
 We now define some terminologies related to distances in graphs.
 \begin{enumerate}
-    \item The total distance of a vertex $v \in V(G)$ is $d(v)=\sum_{u \in V} d(u,v)$.
-    \item The average distance of a vertex $v \in V(G)$ is $\bar{d}(v)=\frac{d(v)}{|G|-1}$.
-    \item The proximity of a graph $G$ is $prox(G) = \min \left\{\bar{d}(v) \mid v \in V(G) \right\}$
-    \item The remoteness of a graph $G$ is $rem(G) = \max \left\{\bar{d}(v) \mid v \in V(G) \right\}$
-    \item The median of a graph, $M(G)$, is the set of vertices $v$, such that, $\bar{d}(v)=prox(G)$
-    \item The radius of a graph $G$ is $rad(G) = \min \left\{ ecc(v) \mid v \in V(G) \right\}$
-    \item The diameter of a graph $G$ is $diam(G) = \max \left\{ ecc(v) \mid v \in V(G) \right\}$
-    \item The center of a graph $C(G)$, is the set of vertices $v$, such that, $ecc(v)=rad(G)$.
-    \item The periphery of a graph $P(G)$, is the set of vertices $v$, such that, $ecc(v)=diam(G)$.
+  \item The total distance of a vertex $v \in V(G)$ is $d(v)=\sum_{u \in V} d(u,v)$.
+  \item The average distance of a vertex $v \in V(G)$ is $\bar{d}(v)=\frac{d(v)}{|G|-1}$.
+  \item The proximity of a graph $G$ is $prox(G) = \min \left\{\bar{d}(v) \mid v \in V(G) \right\}$
+  \item The remoteness of a graph $G$ is $rem(G) = \max \left\{\bar{d}(v) \mid v \in V(G) \right\}$
+  \item The median of a graph, $M(G)$, is the set of vertices $v$, such that, $\bar{d}(v)=prox(G)$
+  \item The radius of a graph $G$ is $\rad(G) = \min \left\{ \ecc(v) \mid v \in V(G) \right\}$
+  \item The diameter of a graph $G$ is $\diam(G) = \max \left\{ \ecc(v) \mid v \in V(G) \right\}$
+  \item The center of a graph $C(G)$, is the set of vertices $v$, such that, $\ecc(v)=\rad(G)$.
+  \item The periphery of a graph $P(G)$, is the set of vertices $v$, such that, $\ecc(v)=\diam(G)$.
 \end{enumerate}
 
 The following theorem describes the proper relationship between the radii and
 diameters of graphs.
 
 \begin{Thm}{}{}
-    For any connected graph $G$, $rad(G) \le diam(G) \le 2rad(G)$.
-\end{Thm}{}{}
+  For any connected graph $G$, $\rad(G) \le \diam(G) \le 2\rad(G)$.
+\end{Thm}
 \begin{proof}
-    It follows from definition that, $rad(G) \le diam(G)$. Let, $u$ and $v$ be two vertices, such that, $d(u,v)=diam(G)$. Let, $c$ be a vertex in center of G. Then,
-    \begin{align*}
-        diam(G) = d(u,v)
-         & \le d(u,c)+d(c,v) \\
-         & \le 2\cdot ecc(c) \\
-         & = 2\cdot rad(G)
-    \end{align*}
-    Thus, we have $diam(G) \le 2\cdot rad(G)$.
+  It follows from definition that, $\rad(G) \le \diam(G)$. Let, $u$ and $v$ be two vertices, such that, $d(u,v)=\diam(G)$. Let, $c$ be a vertex in center of G. Then,
+  \begin{align*}
+    \diam(G) = d(u,v)
+     & \le d(u,c)+d(c,v)  \\
+     & \le 2\cdot \ecc(c) \\
+     & = 2\cdot \rad(G)
+  \end{align*}
+  This completes the proof.
 \end{proof}
 
-\section{Important Theorems}
+\section{Important Tools}
 In the context of a single connected component of a disconnected graph, these terms have their normal meanings. If two vertices are in different components, however, we say that the distance between them is infinity. We conclude this chapter with two interesting results.
 
 \begin{Thm}{}{}
-    Every graph is isomorphic to the center of some other graph.
-\end{Thm}{}{}
+  Every graph is isomorphic to the center of some other graph.
+\end{Thm}
 \begin{proof}
-    Let, $G$ be any graph. If we add four vertices $w,x,y,z$ to $G$ auch that the new graph $H$ is obtained where,\\
-    $v(H)=V(G) \cup \{w,x,y,z\}$, and\\
-    $E(H)=E(G) \cup \{wx,yz\} \cup \{xa:a \in V(G)\} \cup \{yb:b \in V(G)\}$\\
-    Now, $ecc(w)=ecc(z)=4$, $ecc(y)=ecc(x)=3$, and for $v \in V(G), ecc(v)=2$\\
-    Thus, $G$ is the center of $H$.
+  Let, $G$ be any graph. If we add four vertices $w,x,y,z$ to $G$ such that the new graph $H$ is obtained where, $V(H) = V(G) \cup \{w,x,y,z\}$, and $E(H) = E(G) \cup \{wx,yz\} \cup \{xa \mid a \in V(G)\} \cup \{yb \mid b \in V(G)\}$.
+
+  Now, $\ecc(w)=\ecc(z)=4$, $\ecc(y)=\ecc(x)=3$, and for $v \in V(G), \ecc(v)=2$. Thus, $G$ is the center of $H$.
 \end{proof}
 
 \begin{Thm}{}{}
-    A graph $G$ is isomorphic to the periphery of some graph iff either every vertex has eccentricity $1$, or no vertex has eccentricity $1$.
-\end{Thm}{}{}
+  A graph $G$ is isomorphic to the periphery of some graph if and only if either every vertex has eccentricity 1, or no vertex has eccentricity 1.
+\end{Thm}
 \begin{proof}
-    Suppose that every vertex of $G$ has eccentricity $1$. Not only does this mean that $G$ is complete, it also means that every vertex of $G$ is in the periphery, that is, $G$ is the periphery of itself.\\
-    $\rightarrow$ On the other hand, suppose that no vertex of $G$ has eccentricity $1$. This means that for every vertex $u$ of $G$, there is some vertex $v$ of $G$ such that $uv \in E(G)$. Now, let $H$ be a new graph, constructed by adding a single vertex, $w$, to $G$, together with the edges ${wx:x \in V (G)}$. In the graph $H$, the eccentricity of $w$ is $1$ ($w$ is adjacent to everything). Further, for any vertex $x \in V (G)$, the eccentricity of $x$ in $H$ is $2$ (no vertex of $G$ is adjacent to everything else in $G$, and everything in $G$ is adjacent to $w$). Thus, the periphery of $H$ is precisely the vertices of $G$.\\
-    $\leftarrow$ Let us suppose that $G$ has some vertices of eccentricity $1$ and some vertices of eccentricity greater than $1$. Suppose also that $G$ forms the periphery of some graph, say $H$. Since, the eccentricities of the vertices in $G$ are not all the same, it must be that $V(G)$ is a proper subset of $V(H)$. This means that $H$ is not the periphery of itself and that $diam(H) \ge 2$. Now, let $v$ be a vertex of $G$ whose eccentricity in $G$ is $1$ ($v$ is therefore adjacent to all vertices of $G$). Since $v \in V(G)$ and since $G$ is the periphery of $H$, there exists a vertex $w$ in $H$ such that $d(v,w) = diam(H) \ge 2$. The vertex $w$, then, is also a peripheral vertex and therefore must be in $G$. This contradicts the fact that $v$ is adjacent to everything in $G$.
+  Suppose that every vertex of $G$ has eccentricity $1$. Not only does this mean that $G$ is complete, it also means that every vertex of $G$ is in the periphery, that is, $G$ is the periphery of itself.
+  \begin{itemize}
+    \item[$\Longrightarrow$] On the other hand, suppose that no vertex of $G$ has eccentricity $1$. This means that for every vertex $u$ of $G$, there is some vertex $v$ of $G$ such that $uv \in E(G)$. Now, let $H$ be a new graph, constructed by adding a single vertex, $w$, to $G$, together with the edges ${wx:x \in V (G)}$. In the graph $H$, the eccentricity of $w$ is $1$ ($w$ is adjacent to everything). Further, for any vertex $x \in V (G)$, the eccentricity of $x$ in $H$ is $2$ (no vertex of $G$ is adjacent to everything else in $G$, and everything in $G$ is adjacent to $w$). Thus, the periphery of $H$ is precisely the vertices of $G$.
+    \item[$\Longleftarrow$] Let us suppose that $G$ has some vertices of eccentricity $1$ and some vertices of eccentricity greater than $1$. Suppose also that $G$ forms the periphery of some graph, say $H$. Since, the eccentricities of the vertices in $G$ are not all the same, it must be that $V(G)$ is a proper subset of $V(H)$. This means that $H$ is not the periphery of itself and that $\diam(H) \ge 2$. Now, let $v$ be a vertex of $G$ whose eccentricity in $G$ is $1$ ($v$ is therefore adjacent to all vertices of $G$). Since $v \in V(G)$ and since $G$ is the periphery of $H$, there exists a vertex $w$ in $H$ such that $d(v,w) = \diam(H) \ge 2$. The vertex $w$, then, is also a peripheral vertex and therefore must be in $G$. This contradicts the fact that $v$ is adjacent to everything in $G$.
+  \end{itemize}
 \end{proof}
 
 \end{document}

@@ -33,7 +33,9 @@ We start off this chapter by including some definitions. It would help you all t
 \begin{Def}{Hamiltonian graph}{}
     A graph is said to be Hamiltonian if it has a Hamiltonian cycle.
 \end{Def}
+\end{Def}
 
+\begin{Thm}{}{}
 \begin{Thm}{}{}
     For a connected graph $G$, TFAE (the following are equivalent) :
     \begin{enumerate}
@@ -41,7 +43,7 @@ We start off this chapter by including some definitions. It would help you all t
         \item[(ii)] Every vertex of $G$ has even degree.
         \item[(iii)] The edges of $G$ can be partitioned into edge-disjoint cycles.
     \end{enumerate}
-\end{Thm}{}{}
+\end{Thm}
 The proof of this theorem is intuitive and are left as an exercise for the reader. It will be nice if you try to prove part (iii) and you can send your proofs on the group.
 \begin{cor}
     The connected graph $G$ contains an Eulerian trail iff there are at most $2$ vertices of odd degree.
@@ -51,19 +53,19 @@ Now, we state two very important theorems that will be used both in our Random G
 
 \begin{Thm}{Dirac's theorem}{}
     Let, $G$ be a graph of order $n \ge 3$. If $\delta(G) \ge \frac{n}{2}$, then $G$ is Hamiltonian.
-\end{Thm}{}{}
+\end{Thm}
 \begin{proof}
     Suppose $G$ is a counterexample to the theorem and $G$ be such a graph with maximal number of edges i.e., addition of an edge to $G$ creates a cycle.  Let $v \nsim w$ and hence $G \cup (v,w)$ will contain a Hamilton cycle $v = v_1v_2\ldots v_n=w,v$. Thus $v_1v_2\ldots v_n$ is a simple path. Define sets $S_v \coloneqq \{ i : v \sim v_{i+1} \}$ and $S_w \coloneqq \{ i : w \sim v_i\}$. Since $\delta(G) \geq n/2$, $|S_v|, |S_w| \geq n/2$ and further $S_v, S_w \subset \{1,\ldots,n-1\}$. Hence $S_v \cap S_w \neq \emptyset$ and assume that $i_0 \in S_v \cap S_w$. Then $v = v_1v_2\ldots v_{i_0}w=v_nv_{n-1}\ldots v_{i_0+1}v_1=v$ is a Hamiltonian circuit in $G$, contradicting our assumption.
 \end{proof}
 
 \begin{Thm}{Ore's theorem}{}
     Let, $G$ be a graph of order $n \ge 3$. If $deg(x)+deg(y) \ge n$, then $\forall$ pairs of non-adjacent vertices $x,y$, then $G$ is Hamiltonian.
-\end{Thm}{}{}
+\end{Thm}
 
 The proof of this theorem is left as an exercise to the reader. You can make use of Dirac's theorem as well as the approach used in it's proof to prove Ore's theorem. We encourage you to share your proof in the group.\\
 Next, we define some very useful terminologies that will be of essence.\\
 
-\begin{Def}{Independent sets and covers}{}
+\begin{Def}{Independent sets and covers}{} \index{independent sets} \index{cover}
     An {\em independent set of vertices} is $S \subset V$ such that no two vertices in $S$ are adjacent. An {\em independent set of edges} is $E' \subset E$ such that no two edges in $E'$ share a common end vertex. A subset of vertices $S \subset V$ is a {\em vertex cover} if every edge in $G$ is incident to at least one vertex in $S$. An {\em edge cover} is a set of edges $E' \subset E$ such that every vertex is contained in at least one edge in $E'$.
 \end{Def}
 \begin{Def}{Independence number and cover number}{}
@@ -80,7 +82,7 @@ Now we will state a very interesting theorem which relates the Hamiltonicity of 
 
 \begin{Thm}{}{}
     Let, $G$ be a connected graph of order $n \ge 3$ with vertex connectivity $\kappa(G)$ and independence number $\alpha(G)$. If $\kappa(G) \ge \alpha(G)$, then G is Hamiltonian.
-\end{Thm}{}{}
+\end{Thm}
 You can skip the proof of this theorem if you want, as the proof would not be a crucial part of our WRP.
 \begin{proof}
     If $G$ is as described, then $\kappa(G) \ge 2$, as if $\kappa(G)=1$, then $\alpha(G)=1$ and thus $G$ is either $K_1$ or $K_2$, contradicting the fact that $n \ge 3$.\\
@@ -100,7 +102,7 @@ Next, we introduce the idea of forbidden subgraphs. The absence of any particula
 
 \begin{Thm}{}{}
     If $G$ is a $2$-connected, $\{K_{1,3}, Z_{1}\}$-free graph, then $G$ is Hamiltonian
-\end{Thm}{}{}
+\end{Thm}
 \begin{proof}
     Suppose $G$ is $2$-connected and ${K_{1,3}, Z_1}$-free, and let $C$ be a longest cycle in $G$. If $C$ is not a Hamiltonian cycle, then there must exist a vertex $v$, not on $C$, which is adjacent to a vertex, say $w$, on $C$. Let $a$ and $b$ be the immediate predecessor and successor of $w$ on $C$.\\
     A longer cycle would exist if either $a$ or $b$ were adjacent to $v$, and so it must be that both $a$ and $b$ are nonadjacent to $v$. Now, if $a$ is not adjacent to $b$, then the subgraph induced by the vertices ${w,v,a,b}$ is $K_{1,3}$, and we know that $G$ is $K_{1,3}$-free. So it must be that $ab \in E(G)$. But if this is the case, then the subgraph induced by ${w,v,a,b}$ is $Z_1$, a contradiction. Therefore, it must be that $C$ is a Hamiltonian cycle.
@@ -113,19 +115,19 @@ Next, we introduce the idea of forbidden subgraphs. The absence of any particula
         \item If $G$ is connected, then $G$ is traceable.
         \item If $G$ is $2$-connected, then $G$ is Hamiltonian.
     \end{enumerate}
-\end{Thm}{}{}
+\end{Thm}
 
 The proof of the second part follows directly from theorem \ref{ref:1}. The proof of the first part is also simple and the only obstacle that may arise is understanding what we mean by traceable. A traceable graph refers to a graph that has a Hamiltonian path.
 \begin{figure}[htbp]
     \tikzset{every picture/.style={line width=0.75pt}}
     \begin{center}
         \begin{tikzpicture}[x=0.65pt,y=0.65pt,yscale=-0.5,xscale=0.5]
-            \draw    (326,92) -- (399,202.41) ;
-            \draw    (326,92) -- (254,202.41) ;
-            \draw    (254,202.41) -- (399,202.41) ;
-            \draw    (327,18.41) -- (326,92) ;
-            \draw    (474,249.41) -- (399,202.41) ;
-            \draw    (182,246.41) -- (254,202.41) ;
+            \draw  (326,92) -- (399,202.41) ;
+            \draw  (326,92) -- (254,202.41) ;
+            \draw  (254,202.41) -- (399,202.41) ;
+            \draw  (327,18.41) -- (326,92) ;
+            \draw  (474,249.41) -- (399,202.41) ;
+            \draw  (182,246.41) -- (254,202.41) ;
         \end{tikzpicture}
     \end{center}
     \caption{This graph is represented by \textbf{N}}

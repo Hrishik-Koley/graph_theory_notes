@@ -20,11 +20,9 @@ header-includes: |
 - [Bikram Halder](https://github.com/BikramHalder)
 - [Hrishik Koley](https://github.com/Hrishik-Koley)
 
-B. Math (2021-'24) Students at [Indian Statistical Institute, Bangalore](https://www.isibang.ac.in)
-
 ## All Notes
 
-Get full [Graph Theory Notes notes](./pdfs/basic_graph_theory.pdf) by Hrishik Koley
+Get full [Graph Theory notes](./pdfs/basic_graph_theory.pdf) by [Hrishik Koley](https://instagram.com/_mortal_devil_) & [Bikram Halder](https://instagram.com/_prowessj_).
 
 ## Individual Chapters
 

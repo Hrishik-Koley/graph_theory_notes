@@ -98,21 +98,20 @@ Before delving deeper, let's establish definitions for various classes of graphs
           \begin{tikzpicture}[>=stealth, every node/.style={circle, draw, minimum size=5mm}]
 
             % Nodes
-            \node (1) at (0,0) {1};
-            \node (2) at (2,0) {2};
-            \node (3) at (4,0) {3};
-            \node (4) at (1,-2) {4};
-            \node (5) at (3,-2) {5};
-
-            % Pseudograph with self-loops
-            \draw (1) -- (2);
-            \draw (1) -- (4);
-            \draw (2) -- (3);
-            \draw (2) to[bend right] (4);
-            \draw (2) to[bend left] (4);
-            \draw (3) to[bend right=30] (1);
-            \draw (4) -- (5);
-            \draw (5) to [out=10, in=100, looseness=8] (5);
+        \node (1) at (0,0) {1};
+        \node (2) at (2,0) {2};
+        \node (3) at (4,0) {3};
+        \node (4) at (1,-2) {4};
+        \node (5) at (3,-2) {5};
+        % Pseudograph with self-loops
+        \draw (1) -- (2);
+        \draw (1) -- (4);
+        \draw (2) -- (3);
+        \draw (2) to[bend right] (4);
+        \draw (2) to[bend left] (4);
+        \draw (3) to[bend right=30] (1);
+        \draw (4) -- (5);
+        \draw (5) to [out=10, in=100, looseness=8] (5);
           \end{tikzpicture}
           \caption{Pseudograph}
           \label{fig:pseudograph}
@@ -139,14 +138,13 @@ Before delving deeper, let's establish definitions for various classes of graphs
 \end{enumerate}
 
 \section{Important Terminologies}
-\begin{Def}{Neighbourhood}{}
-  The neighbourhood of a vertex $v$ in graph $G$, denoted by $N(v)$, represents the set of vertices adjacent to $v$: $N(v) = \left\{x \in V(G) \mid \{v,x\} \in E(G)\right\}$.
+
+\begin{Def}{Order and Size}{order:size}
+  The \textbf{order} of a graph, denoted by $|V(G)|$, is defined as the cardinality of the vertex set $V(G)$. Similarly, the \textbf{size} of the graph, denoted by $|E(G)|$, is defined as the cardinality of the edge set $E(G)$.
 \end{Def}
 
-Let's introduce some basic concepts.
-
-\begin{Def}{Order and Size}{}
-  The order of the graph, denoted by $|V(G)|$, is the cardinality of $V(G)$. Similarly, the size of the graph, denoted by $|E(G)|$, is the cardinality of $E(G)$.
+\begin{Def}{Neighbourhood and Degree}{nbd:deg}
+  For a given graph $G$ and vertex $v$, the \textbf{neighbourhood} of vertex $v$, denoted by $N(v)$, is defined as the set of vertices adjacent to $v$: $N(v) = \left\{x \in V(G) \mid \{v,x\} \in E(G)\right\}$. The \textbf{degree} of vertex $v$, denoted as $\deg(v)$, is defined as the cardinality of its neighbourhood: $\deg(v) = |N(v)|$.
 \end{Def}
 
 We introduce two more notations:
@@ -158,7 +156,7 @@ We introduce two more notations:
 
 Now, let's state one of the famous and basic theorems.
 
-\begin{Thm}{}{}
+\begin{Thm}{}{deg:edge}
   \label{ref:3}
   In a graph $G$, the sum of the degrees of vertices is equal to twice the number of edges:
   \[ 2 |E(G)| = \sum_{v \in V(G)}\deg(v) \]
