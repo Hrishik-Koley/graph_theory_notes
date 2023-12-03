@@ -3,25 +3,28 @@
 \begin{document}
 \chapter{Matchings}
 \setcounter{chapter}{5} %Set chapter counter
-\setcounter{section}{5}
-\setcounter{equation}{5}
-\setcounter{figure}{5}
+\setcounter{section}{0}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
 
-\begin{defn}\index{matching} \index{perfect matching}
+\begin{Def}{}{}
     A subset $M$ of edges is said to be {\em independent / matching} if no two edges are incident on any vertex or equivalently, every vertex is contained in at most one edge. A {\em complete matching} $M$ on a subset $S \subset V$ is a matching that contains all the vertices in $S$. A perfect matching is a complete matching on $G$. 
-\end{defn}
+\end{Def}
     %
     Alternatively one can consider a matching of a graph $M$ as a subgraph of $G$ such that $d_M(v) = 1$ for all $v \in V(M)$. A matching is perfect if $M$ is spanning. A vertex $v$ is said to be {\em saturated} if $v \in M$ and else {\em unsaturated}. For a subset $S \subset V$, $N(S) = \bigcup_{v \in S}N(v).$
     %
-\begin{thm}[Hall's marriage theorem] \index{Hall's marriage theorem}
+\begin{Thm}{Hall's marriage theorem}{}
     Let $G$ be a bi-partite graph with the two vertex sets being $V_1,V_2$.  Then there exists a complete matching on $V_1$ iff $|N(S)| \geq |S|$ for all $S \subset V_1$. 
-\end{thm}
+\end{Thm}{}{}
     %
 \begin{proof}
-    Let $|V_1| = k$ and our proof will be by induction on $k$. If $k = 1$, the proof is trivial.\\
-    Let $G = V_1 \cup V_2$ be such that the result holds for any graph with strictly smaller $V_1$.\\ 
-    Suppose that $|N(S)| \geq |S| + 1$ for all $S \subsetneq V_1$. Then choose $(v,w) \in E \cap V_1 \times V_2$ and consider the induced subgraph $G' := <V - \{v,w\}>$. Since we have removed only $w$ from $V_2$ and that $|N(S)| \geq |S| + 1$ for all $S \subsetneq V_1$, we get that $|N(S')| \geq |S'|$ for all $S' \subset V_1 - \{v\}$. Thus there is a complete matching $M$ on $V_1 - \{v\}$ in $G'$ by induction hypothesis and $M \cup (v,w)$ is a complete matching on $V_1$ in $G$ as desired.\\
-    If the above is not true i.e., there exists $A \subset V_1$ such that $N(A) = B$ and $|A| = |B|$. Then, by induction hypothesis, there is a complete matching $M_0$ on $A$ in the induced subgraph $<A \cup B>$. Trivially,  Hall's condition holds i.e., for all $S \subset A$,  $|N(S) \cap B| =  |N(S)| \geq |S|$. Let $G' := G - <A \cup B>$.  Let $S \subset V_1 - A$.  Suppose if $|N'(S)| < |S|$ where $N'(S) = N(S) \cap (V_2 - B)$.  Then,  we have that $N(S \cup A) = N'(S) \cup B$ and hence $|N(S \cup A)| \leq |N'(S)| + |B| < |S| + |A|$,  a contradiction.  Hence, $G'$ also satisfies Hall's condition and again by induction hypothesis $G'$ has a complete matching $M'$ on $V_1 -A$. Thus, we have a complete matching $M := M_0 \cup M'$ on $V_1$ in $G$.\\
+    Let $|V_1| = k$ and our proof will be by induction on $k$. If $k = 1$, the proof is trivial.
+
+    Let $G = V_1 \cup V_2$ be such that the result holds for any graph with strictly smaller $V_1$.
+
+    Suppose that $|N(S)| \geq |S| + 1$ for all $S \subsetneq V_1$. Then choose $(v,w) \in E \cap V_1 \times V_2$ and consider the induced subgraph $G' := <V - \{v,w\}>$. Since we have removed only $w$ from $V_2$ and that $|N(S)| \geq |S| + 1$ for all $S \subsetneq V_1$, we get that $|N(S')| \geq |S'|$ for all $S' \subset V_1 - \{v\}$. Thus there is a complete matching $M$ on $V_1 - \{v\}$ in $G'$ by induction hypothesis and $M \cup (v,w)$ is a complete matching on $V_1$ in $G$ as desired.
+
+    If the above is not true i.e., there exists $A \subset V_1$ such that $N(A) = B$ and $|A| = |B|$. Then, by induction hypothesis, there is a complete matching $M_0$ on $A$ in the induced subgraph $<A \cup B>$. Trivially,  Hall's condition holds i.e., for all $S \subset A$,  $|N(S) \cap B| =  |N(S)| \geq |S|$. Let $G' := G - <A \cup B>$.  Let $S \subset V_1 - A$.  Suppose if $|N'(S)| < |S|$ where $N'(S) = N(S) \cap (V_2 - B)$.  Then,  we have that $N(S \cup A) = N'(S) \cup B$ and hence $|N(S \cup A)| \leq |N'(S)| + |B| < |S| + |A|$,  a contradiction.  Hence, $G'$ also satisfies Hall's condition and again by induction hypothesis $G'$ has a complete matching $M'$ on $V_1 -A$. Thus, we have a complete matching $M := M_0 \cup M'$ on $V_1$ in $G$.
 \end{proof}
     %
 \begin{prop}
@@ -32,15 +35,15 @@
     Set $V'_2 := V_2 \cup [d]$. Define $G'$ with vertex set as $V_1 \sqcup V'_2$ and edge set as $E(G) \cup (V_1 \times [d])$. Then, it is easy to see that Hall's condition is true on $G'$ and hence there is a complete matching $M$ of $V_1$ in $G'$. Now, if we remove the edes in $M$ incident on $[d]$, we get a matching with at least $|V_1| - d$ edges as required. 
 \end{proof}
     %
-\begin{defn}[Factor of a graph \index{factor}]
+\begin{Def}{}{}[Factor of a graph \index{factor}]
         Given a graph $G$,  a factor of $G$ is a spanning subgraph.  Equivalently,  a subgraph $H$ is said to be a factor (of $G$) if $V(H) = V(G)$. An $r$-factor is a factor that is $r$-regular. 
-\end{defn}
+\end{Def}
         %
 Thus, $1$-factors are nothing but perfect matchings.
         %
-\begin{thm}[Petersen, 1891]
+\begin{Thm}{Petersen's theorem}{}
         Every regular graph of positive even degree has a $2$-factor.
-\end{thm}
+\end{Thm}{}{}
         %
 The proof is intuitive and left as an exercise for the reader.\\
 A matching $M$ is said to be {\em maximal} if there is no matching $M'$ such that $M \subsetneq M'$.  A matching $M$ is said to be {\em a maximum matching} if $\alpha'(G) = |M|$.\\
@@ -55,23 +58,24 @@ As for the second inequality, observe that to cover vertices of an independent s
 \begin{lem}
 Let $G$ be a graph. $S \subset V$ is an independent set iff $S^c$ is a vertex cover. As a corollary, we get $\alpha(G) + \beta(G) = n = |V|.$ 
 \end{lem}
-\begin{thm}[Konig-Egervary theorem] \index{Konig-Egervary theorem}
+\begin{Thm}{Konig-Egervary theorem}{}
     For a bi-partite graph, $\alpha'(G) = \beta(G)$. 	
-\end{thm}
+\end{Thm}{}{}
 \begin{proof}
         We will show that for a minimum vertex cover $Q$, there exists a matching of size at least $|Q|$. Partition $Q$ into $A := Q \cap V_1$ and $B := Q \cap V_2$. Let $H$ and $H'$ be induced subgraphs on $A \sqcup (V_2 - B)$ and $(V_1 - A) \sqcup B$ respectively. If we show that there is a complete matching on $A$ in $H$ and a complete matching on $B$ in $H'$, we have a matching of size at least $|A| + |B|$ ($= |Q|$) in $G$.  Also, note that it suffices to show that there is a complete matching on $A$ in $H$ because we can reverse the roles of $A$ and $B$ apply the same argument to $B$ as well. \\
         Since $A \cup B$ is a vertex cover, there cannot be an edge between $V_1 - A$ and $V_2 - B$. Suppose for some $S \subset A$, we have that $|N_H(S)| < |S|$. Since $N_H(S)$ covers all edges from $S$ that are not incident on $B$, $Q' := Q - S + N_H(S)$ is also a vertex cover. By choice of $S$, $Q'$ is a smaller vertex cover than $Q$ contradicting that $Q$ is minimum.  Hence, we have that Hall's condition holds true for $A$ in $H$. And by the arguments in the previous paragraph, the proof is complete. 
 \end{proof}
-\begin{thm}[Gallai, 1959] \index{Gallai theorem}
+\begin{Thm}{Gallai theorem}{}
     If $G$ is a graph without isolated vertices, then $\alpha'(G) + \beta'(G) = n = |V|.$	
-\end{thm}
+\end{Thm}{}{}
     %
 \begin{proof}
     Suppose $M$ is a maximum matching. Then $S = V - V(M)$ is also an independent set. If there are edges between vertices of $S$, then such edges can be added to $M$ and one can obtain a larger matching. Hence there are no edges between vertices of $S$ and hence it is a independent set. Construct a edge cover as follows : Add all edges in $M$ to $Q$ and for each $v \in S$, add one of its adjacent edges to $Q$.  Since there are no isolated vertices,  $v$ has atleast one adjacent edge.  Thus $|Q| = |M| + |S|$ and since $V(M) \sqcup S = V$, we can derive that\\
     \begin{center}
     $\alpha'(G) + \beta'(G) \leq |M| + |Q| = 2|M| + |S| = n$
     \end{center}
-    Let $Q$ be a minimum edge cover. Then $Q$ cannot contain a path of length more than $2$. Else, by removing the middle edge in a path of length at least 3, we can obtain a smaller edge cover. By the previous exercise, $Q$ is a graph consisting of star components. If $C_1,\ldots,C_k$ are the components of $Q$, then $V(C_1) \cup \ldots \cup V(C_k) = V$ and $E(C_1) \cup \ldots \cup E(C_k) = Q$. Now choose a matching $M = \{e_1,\ldots,e_k\}$ by selecting one edge from every component $C_1,\ldots,C_k$.  Since $C_i$'s are disjoint, $M$ is a matching. Thus, using the fact that each $Q$ is a forest with $k$ components, we can derive that\\
+    Let $Q$ be a minimum edge cover. Then $Q$ cannot contain a path of length more than $2$. Else, by removing the middle edge in a path of length at least 3, we can obtain a smaller edge cover. By the previous exercise, $Q$ is a graph consisting of star components. If $C_1,\ldots,C_k$ are the components of $Q$, then $V(C_1) \cup \ldots \cup V(C_k) = V$ and $E(C_1) \cup \ldots \cup E(C_k) = Q$. Now choose a matching $M = \{e_1,\ldots,e_k\}$ by selecting one edge from every component $C_1,\ldots,C_k$.  Since $C_i$'s are disjoint, $M$ is a matching. Thus, using the fact that each $Q$ is a forest with $k$ components, we can derive that,
+
     \begin{center}
     $$ \alpha'(G) + \beta'(G)  \geq |M| + |Q| = k + |E(Q)| = n.$$
     \end{center}
@@ -79,13 +83,13 @@ Let $G$ be a graph. $S \subset V$ is an independent set iff $S^c$ is a vertex co
     %
 As a corollary, we get K\"{o}nig's result : if $G$ is bi-partite graph without isolated vertices, $\alpha(G) = \beta'(G)$. 
     %
-\begin{defn}[Augmenting path \index{augmenting path}]
+\begin{Def}{Augmenting Path}{}
     Given a matching $M$, a $M$-alternating path $P$ is a path such that its edges alternate between $M$ and $M^c$.  A $M$-augmenting path is a $M$-alternating path whose end-vertices do not belong to $M$. 
-\end{defn}
+\end{Def}
     %
-\begin{thm}[Berge, 1957\index{Berge theorem}]
+\begin{Thm}{Berge theorem}{}
         A matching $M$ in a graph is a maximum matching in $G$ iff $G$ has no $M$-augmenting path.
-\end{thm}
+\end{Thm}{}{}
     %
 \begin{proof}
     Suppose there is an $M$-augmenting path $P$. Let $P = v_0v_1\ldots v_k$. Since $P$ is $M$-augmenting, $(v_0,v_1),(v_2,v_3),\ldots,(v_{k-1},v_k) \notin M$ and $(v_1,v_2), (v_3,v_4),\ldots,(v_{k-2},v_{k-1}) \in M$.  Now, observe that $M' = M - P \cup \{ (v_0,v_1),(v_2,v_3),\ldots,(v_{k-1},v_k) \}$ is a larger matching than $M$. Hence if $M$ is a maximum matching, there is no $M$-augmenting path. 
@@ -111,17 +115,17 @@ As a corollary, we get K\"{o}nig's result : if $G$ is bi-partite graph without i
 \end{proof}
 Recall definition of graph factors.  For a graph $G$, let $o(G)$ denote the number of odd components of $G$. The next theorem that we will be stating has a long proof and you may skip it if you want.
 %
-\begin{thm}[Tutte 1-factor theorem \index{Tutte's factor theorem}]
+\begin{Thm}{Tutte's 1-factor theorem}{}
 A graph has a $1$-factor iff $o(G-S) \leq |S|$ for all $S \subset V$.
-\end{thm}
+\end{Thm}{}{}
 \begin{proof}
     \textbf{\textit{To Be Added\dots}}
 \end{proof}
 We end this chapter by stating Menger's theorem. However, before diving into the theorem we need to look at some definitions.\\
 Let $G$ be a connected graph, and let $u$ and $v$ be vertices of $G$. If $S$ is a subset of vertices that does not include $u$ or $v$, and if the graph $G-S$ has $u$ and $v$ in different connected components, then we say that $S$ is a $u,v$-separating set.\\
-\begin{thm}
+\begin{Thm}{}
     Let $G$ be a graph and let $u$ and $v$ be vertices of $G$. The maximum number of internally disjoint paths from $u$ to $v$ equals the minimum number of vertices in a $u,v$-separating set.
-\end{thm}
+\end{Thm}{}
 You can skip the proof of this theorem if you wish.
 \begin{proof}
     \textbf{\textit{To Be Added\dots}}
