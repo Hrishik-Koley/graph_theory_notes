@@ -3,9 +3,174 @@
 \begin{document}
 \chapter{Spectral Graph Theory}
 \setcounter{chapter}{8} %Set chapter counter
-\setcounter{section}{8}
-\setcounter{equation}{8}
-\setcounter{figure}{8}
+\setcounter{section}{0}
+\setcounter{equation}{0}
+\setcounter{figure}{0}
 
+This chapter employs linear algebra tools to systematically investigate graph properties, thereby facilitating a more lucid comprehension and expeditious validation of proofs for both antecedent and contemporary results.
+
+We start by clarifying our convention. For a graph $ G = (V, E) $ on $ n $ vertices and $ m $ edges, we denote the vertex set $ V(G) $ as $ [n] = \left\{ 1, \dots, n \right\} $ and the edge set $ E(G) $ as $ E = \left\{ e_{1}, \dots, e_{m} \right\} $. We will also assume that the vertices of $ G $ are ordered in some way.
+
+\section{Basic facts from Linear Algebra}
+
+
+\section{Incidence Matrix}
+
+\begin{Def}{}{Incidence Matrix}
+  Let $G$ be a graph with $n$ vertices and $m$ edges, we first assign an orientation to the edges and consider them as $E(G) = \left\{ e_j = \left( e_j^{+}, e_j^{-} \right) \mid j = 1, \dots, m \right\} $. Here, $ e_j^{+} $ denotes the vertex where the edge \(e_j\) is outgoing and $ e_j^{-} $ denotes the vertex where the same is incoming. Then the \textbf{incidence matrix} of $G$ is the $n \times m$ matrix $Q = \left( (q_{ij}) \right)_{m \times n}$ defined as follows:
+  \begin{align*}
+    q_{ij} = \begin{cases}
+               1  & \text{if } v_{i} = e_{j}^{+} \\
+               -1 & \text{if } v_{i} = e_{j}^{-} \\
+               0  & \text{otherwise}
+             \end{cases}
+  \end{align*}
+\end{Def}
+
+\begin{figure}[hbt]
+  \centering
+  \begin{tikzpicture}[->]
+    % Nodes
+    \foreach \i in {1,...,5}
+    \node[circle, draw, minimum size=5mm] (N\i) at ({360/5 * (\i - 1)}:2cm) {$\i$};
+
+    % Edges
+    \foreach \i/\j/\edgeindex in {1/2/1, 2/3/2, 3/4/3, 4/5/4, 5/1/5, 1/3/6}
+    \draw (N\i) -> (N\j) node[midway, above] {$e_{\edgeindex}$};
+  \end{tikzpicture}
+  \label{fig:incidence}
+  \caption{Graph $G_1 = \left( [5], \left\{ e_1, \dots, e_6 \right\}  \right)$}
+\end{figure}
+
+\begin{Eg}{}{incidence}
+  Consider the graph $ G_1 $ having the incidence matrix $ Q(G_1) $ as follows:
+  \[
+    Q(G_1) = \begin{pmatrix}
+      \ \ 1 & \ \ 0 & \ \ 0 & \ \ 0 & -1    & \ \ 1 \\
+      -1    & \ \ 1 & \ \ 0 & \ \ 0 & \ \ 0 & \ \ 0 \\
+      \ \ 0 & -1    & \ \ 1 & \ \ 0 & \ \ 0 & -1    \\
+      \ \ 0 & \ \ 0 & -1    & \ \ 1 & \ \ 0 & \ \ 0 \\
+      \ \ 0 & \ \ 0 & \ \ 0 & -1    & \ \ 1 & \ \ 0
+    \end{pmatrix}
+  \]
+\end{Eg}
+
+Now, we list some basic properties of the incidence matrix.
+\begin{Thm}{}{}
+  Consider a graph $G$ with $n$ vertices and $m$ edges. For two incidence matrices $ Q_1 $ and $ Q_2 $ of $ G $, there exists a diagonal matrix $ D $ of order \(m\) with diagonal entries \(1\) or \(-1\) such that $ Q_1 = Q_2 D $.
+\end{Thm}
+\begin{proof}
+  Considering the digraphs corresponding to \(Q_1\) and \(Q_2\), and noting their shared underlying graph with identical vertices and edges, we relabel the edges of \(Q_2\) to align with \(Q_1\). Define the diagonal matrix \(D\) such that \(D_{ii} = 1\) if the \(i^{\text{th}}\) edge has the same orientation in both \(Q_1\) and \(Q_2\), and \(D_{ii} = -1\) if their orientations are opposite. This establishes \(Q_1 = Q_2 D\), which completes the proof.
+\end{proof}
+
+For a graph \(G\), note that the column sums of \(Q(G)\) are zero due to each edge being incident to exactly two vertices, and each vertex being incident to exactly two edges.
+
+\begin{Thm}{Rank}{rank:incidence}
+  If \(G\) is a connected graph on \(n\) vertices, then \(\rank Q(G) = n - 1\). More generally, if \(G\) has \(k\) components, then \(\rank Q(G) = n - k\).
+\end{Thm}
+\begin{proof}
+  For a connected graph \(G\), let \(x\) be in the left null space of \(Q := Q(G)\), i.e., \(x^TQ = 0\). Since \(G\) is connected, all components of \(x\) are equal. Thus, the left null space of \(Q\) is at most one-dimensional, making the rank of \(Q\) at least \(n - 1\). Also, as the rows of \(Q\) are linearly dependent, \(\rank Q \leq n - 1\), implying \(\rank Q = n - 1\).
+
+  If \(G\) has \(k\) connected components, after relabeling the vertices (if necessary), we can express \(Q(G)\) as a block diagonal matrix,
+  \[
+    Q(G) = \begin{pmatrix} Q(G_1) & & \\ & \ddots & \\ & & Q(G_k) \end{pmatrix}
+  \]
+  Since each \(G_i\) is connected, \(\rank Q(G_i) = n_i - 1\), where \(n_i\) is the number of vertices in \(G_i\). Thus, \(\rank Q = \rank Q_1 + \dots + \rank Q_k = n - k\).
+\end{proof}
+
+\begin{Thm}{}{column:independent}
+  Let \(G\) be a graph on \(n\) vertices. Columns \(j_1, \dots, j_k\) of \(Q(G)\) are linearly independent if and only if the corresponding edges of \(G\) induce an acyclic subgraph.
+\end{Thm}
+\begin{proof}
+  Consider edges \(j_1, \dots, j_k\) and suppose there is a cycle in the induced subgraph. Without loss of generality, suppose the columns \(j_1, \dots, j_p\) form a cycle. After relabeling vertices if needed, the submatrix of \(Q(G)\) formed by \(j_1, \dots, j_p\) is \(\begin{bmatrix} B \\ 0 \end{bmatrix}\), where \(B\) is the \(p \times p\) incidence matrix of the cycle. Since \(B\) is singular (having column sums zero), \(j_1, \dots, j_p\) are dependent, which proves the "only if" part.
+
+  Conversely, if \(j_1, \dots, j_k\) induce an acyclic graph (a forest), and the forest has \(q\) components, then \(k = n - q\), which is the rank of the submatrix formed by \(j_1, \dots, j_k\) (by Theorem \ref{th:rank:incidence}). Therefore, the columns \(j_1, \dots, j_k\) are independent.
+\end{proof}
+
+Now we look at the square submatrices of the incidence matrix.
+
+\begin{Def}{Totally unimodlar matrix}{tum}
+  A matrix is called \textbf{totally unimodular} if every square submatrix has determinant \(0, 1,\) or \(-1\).
+\end{Def}
+
+It can be easily proved by induction on the order of the submatrix that \(Q(G)\) is totally unimodular which is our next result.
+
+\begin{Thm}{}{tum:incidence}
+  Let \(G\) be a graph with incidence matrix \(Q(G)\). Then \(Q(G)\) is totally unimodular.
+\end{Thm}
+\begin{proof}
+  We prove the statement that any \(k \times k\) submatrix of \(Q(G)\) has determinant \(0\) or \(\pm 1\) by induction on \(k\). For \(k = 1\), the statement is evident since each entry of \(Q(G)\) is either \(0\) or \(\pm 1\). Assuming the statement holds for \(k - 1\), consider a \(k \times k\) submatrix \(B\) of \(Q(G)\).
+
+  If each column of \(B\) has a \(1\) and \(k - 1\) zeros, or if \(B\) has a zero column, then \( \det B = 0\). If \(B\) has a column with only one nonzero entry, which must be \(\pm 1\), expanding the determinant along that column and using the induction assumption implies that \(\det B\) must be \(0\) or \(\pm 1\).
+\end{proof}
+
+\begin{Thm}{}{}
+  Let \(G\) be a tree on \(n\) vertices. Then any submatrix of \(Q(G)\) of order \(n - 1\) is nonsingular.
+\end{Thm}
+\begin{proof}
+  Consider any \(n - 1\) rows of \(Q(G)\), say \(1, 2, \dots, n - 1\), and let \(B\) be the submatrix formed by these rows. Let \(x\) be a row vector of \(n - 1\) components in the row null space of \(B\). As in the proof of Theorem \ref{th:rank:incidence}, \(x_i = 0\) whenever \(i \sim n\), and the connectedness of \(G\) implies \(x\) is the zero vector. Thus, the rank of \(B\) is \(n - 1\), making \(B\) nonsingular.
+\end{proof}
+
+\section{Adjacency Matrix}
+
+\begin{Def}{}{Adjacency Matrix}
+  For a graph $G$ with verices $V(G) = [n]$ and edges $E(G) = \left\{ e_1, \dots, e_m \right\}$, the \textbf{adjacency matrix} of $G$ is the $n \times n$ matrix $A = (a_{ij})$ defined as follows:
+  \begin{align*}
+    a_{ij} = \begin{cases}
+               1 & \text{if } \{i, j\} \in E(G) \\
+               0 & \text{otherwise}
+             \end{cases}
+  \end{align*}
+\end{Def}
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    % Nodes
+    \foreach \i in {1,...,5}
+    \node[circle, draw, minimum size=5mm] (N\i) at ({360/5 * (\i - 1)}:2cm) {$\i$};
+
+    % Edges
+    \foreach \i/\j in {1/2, 2/3, 3/4, 4/5, 5/1, 1/3}
+    \draw (N\i) -- (N\j);
+  \end{tikzpicture}
+  \label{fig:adjacency}
+  \caption{Graph $G_2$}
+\end{figure}
+
+\begin{Eg}{}{adjacency}
+  Consider the graph $ G_2 $ as undirected version of \(G_1\). Then it has the adjacency matrix $ A(G_2) $ as follows:
+  \[
+    A(G_2) = \begin{pmatrix}
+      0 & 1 & 1 & 0 & 1 \\
+      1 & 0 & 1 & 0 & 0 \\
+      1 & 1 & 0 & 1 & 0 \\
+      0 & 0 & 1 & 0 & 1 \\
+      1 & 0 & 0 & 1 & 0
+    \end{pmatrix}
+  \]
+\end{Eg}
+
+\begin{Thm}{}{}
+  Let \(G\) be a connected graph with vertices \([n]\) and let \(A\) be the adjacency matrix of \(G\). The \((i,j)^{\text{th}}\) entry \(a_{ij}^k\) of \(A^k\) counts the number of \(k\)-length walks with starting and end vertices \(i\) and \(j\) respectively.
+\end{Thm}
+\begin{proof}
+  By induction on \(k\), the result is evident for \(k = 1\). Assuming it holds for \(k = m\), consider \(A^{m+1} = A^m A\). By induction hypothesis, \((i,j)\)-th entry of \(A^m\) counts walks of length \(m\) between vertices \(i\) and \(j\). Now, the number of walks of length \(m + 1\) between \(i\) and \(j\) equals the walks of length \(m\) from \(i\) to each vertex \(k\) adjacent to \(j\). This is expressed as
+  \[
+    a_{ij}^{m+1} = \sum_{k \sim j} a_{ik}^m = \sum_{k = 1}^{n} a^m_{ik} a_{kj}
+  \]
+  which is precisely the \((i,j)^{\text{th}}\) entry of \(A^{m+1} = A^m A\). Hence, the result follows.
+\end{proof}
+
+\begin{Thm}{}{}
+  Let \(G\) be a connected graph with vertices \([n]\) and let \(A\) be the adjacency matrix of \(G\). If \(i, j\) are vertices of \(G\) with \(d(i, j) = m\), then the matrices \(I, A, \dots, A^m\) are linearly independent.
+\end{Thm}
+\begin{proof}
+  We may assume \(i \not= j\). There is no \((ij)\)-path of length less than \(m\). Thus, the \((i, j)\)-element of \(I, A, \dots, A^{m-1}\) is zero, whereas the \((i, j)\)-element of \(A^m\) is nonzero. Hence, the result follows.
+\end{proof}
+
+\section{Laplacian}
+
+For a graph $G$ with $n$ vertices and $m$ edges, the \textbf{Laplacian matrix} of $G$ is the $n \times m$ matrix $L$ defined as \(L = QQ^T\)
 
 \end{document}
