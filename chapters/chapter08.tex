@@ -9,10 +9,13 @@
 
 This chapter employs linear algebra tools to systematically investigate graph properties, thereby facilitating a more lucid comprehension and expeditious validation of proofs for both antecedent and contemporary results.
 
+\ssk
+
 We start by clarifying our convention. For a graph $ G = (V, E) $ on $ n $ vertices and $ m $ edges, we denote the vertex set $ V(G) $ as $ [n] = \left\{ 1, \dots, n \right\} $ and the edge set $ E(G) $ as $ E = \left\{ e_{1}, \dots, e_{m} \right\} $. We will also assume that the vertices of $ G $ are ordered in some way.
 
 \section{Basic facts from Linear Algebra}
 
+\textit{\textbf{To be added...}}
 
 \section{Incidence Matrix}
 
@@ -57,13 +60,17 @@ We start by clarifying our convention. For a graph $ G = (V, E) $ on $ n $ verti
 
 Now, we list some basic properties of the incidence matrix.
 \begin{Thm}{}{}
-  Consider a graph $G$ with $n$ vertices and $m$ edges. For two incidence matrices $ Q_1 $ and $ Q_2 $ of $ G $, there exists a diagonal matrix $ D $ of order \(m\) with diagonal entries \(1\) or \(-1\) such that $ Q_1 = Q_2 D $.
+  Consider a graph $G$ with $n$ vertices and $m$ edges. For two incidence matrices $ Q_1 $ and $ Q_2 $ of $ G $, there exists a diagonal matrix $ D $ of order \(m\) with diagonal entries \(\pm 1\) such that $ Q_1 = Q_2 D $.
 \end{Thm}
 \begin{proof}
   Considering the digraphs corresponding to \(Q_1\) and \(Q_2\), and noting their shared underlying graph with identical vertices and edges, we relabel the edges of \(Q_2\) to align with \(Q_1\). Define the diagonal matrix \(D\) such that \(D_{ii} = 1\) if the \(i^{\text{th}}\) edge has the same orientation in both \(Q_1\) and \(Q_2\), and \(D_{ii} = -1\) if their orientations are opposite. This establishes \(Q_1 = Q_2 D\), which completes the proof.
 \end{proof}
 
-For a graph \(G\), note that the column sums of \(Q(G)\) are zero due to each edge being incident to exactly two vertices, and each vertex being incident to exactly two edges.
+So, it doesn't matter which orientation we choose for the edges of a graph, because every incidence matrix is the same up to the right multiplication of some \(\pm 1\) diagonal matrix.
+
+\ssk
+
+Next we investigate the rank of the incidence matrix. For a graph \(G\), note that the column sums of \(Q(G)\) are zero due to each edge being incident to exactly two vertices, and each vertex being incident to exactly two edges.
 
 \begin{Thm}{Rank}{rank:incidence}
   If \(G\) is a connected graph on \(n\) vertices, then \(\rank Q(G) = n - 1\). More generally, if \(G\) has \(k\) components, then \(\rank Q(G) = n - k\).
@@ -89,7 +96,7 @@ For a graph \(G\), note that the column sums of \(Q(G)\) are zero due to each ed
 
 Now we look at the square submatrices of the incidence matrix.
 
-\begin{Def}{Totally unimodlar matrix}{tum}
+\begin{Def}{Totally unimodular matrix}{tum}
   A matrix is called \textbf{totally unimodular} if every square submatrix has determinant \(0, 1,\) or \(-1\).
 \end{Def}
 
@@ -105,10 +112,29 @@ It can be easily proved by induction on the order of the submatrix that \(Q(G)\)
 \end{proof}
 
 \begin{Thm}{}{}
-  Let \(G\) be a tree on \(n\) vertices. Then any submatrix of \(Q(G)\) of order \(n - 1\) is nonsingular.
+  Let \(G\) be a tree on \(n\) vertices. Then any submatrix of \(Q(G)\) of order \(n - 1\) is nonsingular. Moreover, their determinant have the same absolute value.
 \end{Thm}
 \begin{proof}
   Consider any \(n - 1\) rows of \(Q(G)\), say \(1, 2, \dots, n - 1\), and let \(B\) be the submatrix formed by these rows. Let \(x\) be a row vector of \(n - 1\) components in the row null space of \(B\). As in the proof of Theorem \ref{th:rank:incidence}, \(x_i = 0\) whenever \(i \sim n\), and the connectedness of \(G\) implies \(x\) is the zero vector. Thus, the rank of \(B\) is \(n - 1\), making \(B\) nonsingular.
+
+  \ssk
+
+  Consider,
+  \begin{align*}
+    \det B = \det \begin{pmatrix}
+                    v_1 \\ v_2 \\ \vdots \\ v_{n-1}
+                  \end{pmatrix}
+    = \det \begin{pmatrix}
+             -\sum_{j = 2}^{n} v_j \\ v_2 \\ \vdots \\ v_{n-1}
+           \end{pmatrix}
+    = \det \begin{pmatrix}
+             -v_n \\ v_2 \\ \vdots \\ v_{n-1}
+           \end{pmatrix}
+    = \det \begin{pmatrix}
+             v_2 \\ \vdots \\ v_{n-1} \\ v_n
+           \end{pmatrix}
+  \end{align*}
+  It's your job to convince yourself, no matter which \(n - 1\) rows we choose, the determinant of the corresponding submatrix remains the same (upto sign).
 \end{proof}
 
 \section{Adjacency Matrix}
@@ -139,7 +165,7 @@ It can be easily proved by induction on the order of the submatrix that \(Q(G)\)
 \end{figure}
 
 \begin{Eg}{}{adjacency}
-  Consider the graph $ G_2 $ as undirected version of \(G_1\). Then it has the adjacency matrix $ A(G_2) $ as follows:
+  Consider the graph $ G_2 $ as undirected version of \(G_1\). It has the adjacency matrix $ A(G_2) $ as follows:
   \[
     A(G_2) = \begin{pmatrix}
       0 & 1 & 1 & 0 & 1 \\
@@ -157,7 +183,7 @@ It can be easily proved by induction on the order of the submatrix that \(Q(G)\)
 \begin{proof}
   By induction on \(k\), the result is evident for \(k = 1\). Assuming it holds for \(k = m\), consider \(A^{m+1} = A^m A\). By induction hypothesis, \((i,j)\)-th entry of \(A^m\) counts walks of length \(m\) between vertices \(i\) and \(j\). Now, the number of walks of length \(m + 1\) between \(i\) and \(j\) equals the walks of length \(m\) from \(i\) to each vertex \(k\) adjacent to \(j\). This is expressed as
   \[
-    a_{ij}^{m+1} = \sum_{k \sim j} a_{ik}^m = \sum_{k = 1}^{n} a^m_{ik} a_{kj}
+    \sum_{k \sim j} a_{ik}^m = \sum_{k = 1}^{n} a^m_{ik} a_{kj} = a_{ij}^{m+1}
   \]
   which is precisely the \((i,j)^{\text{th}}\) entry of \(A^{m+1} = A^m A\). Hence, the result follows.
 \end{proof}
@@ -169,8 +195,68 @@ It can be easily proved by induction on the order of the submatrix that \(Q(G)\)
   We may assume \(i \not= j\). There is no \((ij)\)-path of length less than \(m\). Thus, the \((i, j)\)-element of \(I, A, \dots, A^{m-1}\) is zero, whereas the \((i, j)\)-element of \(A^m\) is nonzero. Hence, the result follows.
 \end{proof}
 
+\subsection*{Eigenalues of some graphs}
+
+\begin{tcolorbox}[breakable]
+  \textbf{Complete grpah}, \(K_n\). \(\big\{ n - 1, \underbrace{-1, \dots, -1}_{n - 1} \big\}\)
+
+  \ssk
+
+  Since every vertex of \(K_n\) is adjacent to every other vertex, the adjacency matrix consists of all ones except the diagonal entries, which are zero. Thus \(A(K_n) = J_n - I_n\), where \(J_n\) is the matrix of all ones and \(I_n\) is the identity matrix of order \(n\).
+
+  Recall that \(P_n = \frac{J_n}{n}\) is the projection matrix onto the subspace spanned by the all ones vector. And note that the identity matrix \(I_n\) can be decomposed as the direct sum of \(P_n\) and \(P_n^{\perp}\), which is the projection matrix of it's complement subspace, i.e. \(I_n = P_n + P_n^{\perp}\). Thus
+  \begin{align*}
+    A(K_n)
+     & = J_n - I_n                  \\
+     & = nP_n - (P_n + P_n^{\perp}) \\
+     & = (n-1)P_n + (-1)P_n^{\perp}
+  \end{align*}
+  which is obviously the spectral decomposition of \(A(K_n)\). So the eigenvalues of \(A(K_n)\) are \(n-1\) with multiplicity \(\rank P_n = 1\) and \(-1\) with multiplicity \(n - \rank P_n = n-1\).
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable]
+  \textbf{Complete Bipartite grpah}, \(K_{p, q}\). \(\big\{ \sqrt{pq}, -\sqrt{pq}, \underbrace{0, \dots, 0}_{p + q - 2} \big\}\).
+
+  \ssk
+
+  Note that,
+  \[A(K_{p, q}) = \begin{pmatrix}
+      0        & J_{p, q} \\
+      J_{q, p} & 0
+    \end{pmatrix}\]
+  where \(J_{p, q}\) is the \(p \times q\) matrix of all ones. Since both \(J_{p, q}\) and \(J_{q, p}\) have rank \(1\), \(\rank A(K_{p, q}) = 2\), yielding \(0\) as an eigenvalue with multiplicity \(p + q - 2\).
+  Let \(\lambda\) be a non-zero eigenvalue of \(A\) with an eigenvector \(v = \begin{pmatrix} x \\ y \end{pmatrix}\). Now, \(A(K_{p, q})v = \lambda v\) implies \(J_{p, q}y = \lambda x\) and \(J_{q, p}x = \lambda y\). So \(qJ_px = \lambda^2 x\). Since \(J_p\) has the eigenvalue \(p\) with multiplicity \(1\) and \(0\) with multiplicity \(p - 1\), and \(\lambda \neq 0\), we get \(\lambda^2 = pq\), which gives \(\lambda = \pm \sqrt{pq}\). So the eigenvalues of \(A(K_{p, q})\) are \(0\) with multiplicity \(p + q - 2\) and \(\pm \sqrt{pq}\) each with multiplicity \(1\).
+\end{tcolorbox}
+
+\begin{tcolorbox}[breakable]
+  \textbf{Cycle graph}, \(C_n\). \(\left\{ 2\cos{\frac{2\pi k}{n}} \mid k = 1, \dots, n \right\}\).
+
+  \ssk
+
+  Note that,
+  \[ A(C_n) = U_n + U_n^{T} \]
+  where \(U_n\) is the upshift matrix of order \(n\), and \(U_n U_n^T = I_n = U_n^T U_n\). Utilizing the eigenvalues of \(U_n\), given by \(\left\{ \omega^k \mid k = 1, \dots, n \right\}\) where \(\omega\) is the \(n^{\text{th}}\) root of unity, we obtain that the eigenvalues of \(A(C_n)\) are \(\left\{ \omega^k + \omega^{n-k} \mid k = 1, \dots, n \right\}\).
+\end{tcolorbox}
+
+\begin{Def}{Elementary Subgraph}{elemsubg}
+  Let \(G\) be a graph with \(V(G) = [n]\). A subgraph \(H\) of \(G\) is called an spanning elementary subgraph if each connected component of \(H\) is either an edge or a cycle.
+\end{Def}
+
+We will denote \(c(H)\) and \(c_1(H)\) as the number of components of \(H\) which are edges and cycles respectively.
+
+\begin{Thm}{Determinant}{det:adj}
+  Let \(G\) be a graph with vertices \([n]\) and adjacency matrix \(A\). Then
+  \[
+    \det A = \sum_{\substack{H \subseteq G \\ \text{spanning} \\ \text{elementary}}} (-1)^{n - c_1(H) - c(H)} 2^{c(H)}
+  \]
+\end{Thm}
+
 \section{Laplacian}
 
 For a graph $G$ with $n$ vertices and $m$ edges, the \textbf{Laplacian matrix} of $G$ is the $n \times m$ matrix $L$ defined as \(L = QQ^T\)
+
+\ssk
+
+\textit{\textbf{To be added...}}
 
 \end{document}
