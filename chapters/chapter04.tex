@@ -9,30 +9,30 @@
 
 We start off this chapter by including some definitions. It would help you all to recall the definitions of paths, walks, and trails.
 
-\begin{defn}
+\begin{Def}{}{}
     A path which ends in the starting vertex is called a closed path or cycle.
-\end{defn}
-\begin{defn}
+\end{Def}
+\begin{Def}{}{}
     A trail which ends in the starting vertex is called a closed trail or circuit.
-\end{defn}
-\begin{defn}
+\end{Def}
+\begin{Def}{}{}
     A trail in a graph $G$ that includes every edge of $G$ is called an Eulerian trail.
-\end{defn}
-\begin{defn}
+\end{Def}
+\begin{Def}{}{}
     A circuit in a graph $G$ that includes every edge of $G$ is called an Eulerian circuit.
-\end{defn}
-\begin{defn}
+\end{Def}
+\begin{Def}{}{}
     A graph is said to be Eulerian if it has an Eulerian circuit.
-\end{defn}
-\begin{defn}
+\end{Def}
+\begin{Def}{}{}
     If a path $P$ spans the vertices of $G$, then it is called a Hamiltonian path.
-\end{defn}
-\begin{defn}
+\end{Def}
+\begin{Def}{}{}
     If a cycle $C$ spans the evrtices of $G$, then it is called a Hamiltonian cycle.
-\end{defn}
-\begin{defn}
+\end{Def}
+\begin{Def}{}{}
     A graph is said to be Hamiltonian if it has a Hamiltonian cycle.
-\end{defn}
+\end{Def}
 
 \begin{Thm}{}{}
     For a connected graph $G$, TFAE (the following are equivalent) :
@@ -63,10 +63,10 @@ Now, we state two very important theorems that will be used both in our Random G
 The proof of this theorem is left as an exercise to the reader. You can make use of Dirac's theorem as well as the approach used in it's proof to prove Ore's theorem. We encourage you to share your proof in the group.\\
 Next, we define some very useful terminologies that will be of essence.\\
 
-\begin{defn}[Independent sets and covers] \index{independent sets} \index{cover}
+\begin{Def}{Independent sets and covers}{} \index{independent sets} \index{cover}
     An {\em independent set of vertices} is $S \subset V$ such that no two vertices in $S$ are adjacent. An {\em independent set of edges} is $E' \subset E$ such that no two edges in $E'$ share a common end vertex. A subset of vertices $S \subset V$ is a {\em vertex cover} if every edge in $G$ is incident to at least one vertex in $S$. An {\em edge cover} is a set of edges $E' \subset E$ such that every vertex is contained in at least one edge in $E'$.
-\end{defn}
-\begin{defn}[Independence number and cover number]
+\end{Def}
+\begin{Def}{Independence number and cover number}{}
     %
     \begin{eqnarray*}
         \alpha(G) & = & \max \{|S| : S \, \mbox{independent vertex set} \}. \\
@@ -74,7 +74,7 @@ Next, we define some very useful terminologies that will be of essence.\\
         \beta(G) & = & \min \{|S| : S \, \mbox{vertex cover} \}.  \\
         \beta'(G) & = & \min \{|E'| : E' \, \mbox{edge cover} \}.
     \end{eqnarray*}
-\end{defn}
+\end{Def}
 
 Now we will state a very interesting theorem which relates the Hamiltonicity of a graph with it's connectivity and independence number.
 
