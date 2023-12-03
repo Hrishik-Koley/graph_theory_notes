@@ -15,7 +15,7 @@ header-includes: |
   </style>
 ---
 
-> This is a work in progress and may contain many errors. If you find any, please notify us at the above email addresses.
+> This is a work in progress and may contain many errors. If you find any, please let us know at the email addresses below.
 
 ## [$\LaTeX$ed by](https://github.com/Hrishik-Koley/graph_theory_notes/graphs/contributors)
 
