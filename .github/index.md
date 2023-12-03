@@ -15,10 +15,12 @@ header-includes: |
   </style>
 ---
 
+> This is a work in progress and may contain many errors. If you find any, please notify us at the above email addresses.
+
 ## [$\LaTeX$ed by](https://github.com/Hrishik-Koley/graph_theory_notes/graphs/contributors)
 
-- [Bikram Halder](https://github.com/BikramHalder)
-- [Hrishik Koley](https://github.com/Hrishik-Koley)
+- [Bikram Halder](https://github.com/BikramHalder) - <bikram0x@outlook.com>
+- [Hrishik Koley](https://github.com/Hrishik-Koley) - <hrishik.math@outlook.com>
 
 ## All Notes
 
