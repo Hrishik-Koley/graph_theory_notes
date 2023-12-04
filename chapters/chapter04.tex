@@ -1,134 +1,96 @@
 \documentclass[../basic_graph_theory.tex]{subfiles}
+\myexternaldocument{chapter01}
 
 \begin{document}
-\chapter{Paths, Trails, Cycles, and Circuits}
+\chapter{Trees}
 \setcounter{chapter}{4} %Set chapter counter
 \setcounter{section}{0}
 \setcounter{equation}{0}
 \setcounter{figure}{0}
 
-We start off this chapter by including some definitions. It would help you all to recall the definitions of paths, walks, and trails.
-
-\begin{Def}{Cycle}{}
-    A path which ends in the starting vertex is called a closed path or cycle.
-\end{Def}
-\begin{Def}{Circuit}{}
-    A trail which ends in the starting vertex is called a closed trail or circuit.
-\end{Def}
-\begin{Def}{Eulerin trail}{}
-    A trail in a graph $G$ that includes every edge of $G$ is called an Eulerian trail.
-\end{Def}
-\begin{Def}{Eulerian circuit}{}
-    A circuit in a graph $G$ that includes every edge of $G$ is called an Eulerian circuit.
-\end{Def}
-\begin{Def}{Eulerian graph}{}
-    A graph is said to be Eulerian if it has an Eulerian circuit.
-\end{Def}
-\begin{Def}{Hamiltonian path}{}
-    If a path $P$ spans the vertices of $G$, then it is called a Hamiltonian path.
-\end{Def}
-\begin{Def}{Hamiltonian cycle}{}
-    If a cycle $C$ spans the evrtices of $G$, then it is called a Hamiltonian cycle.
-\end{Def}
-\begin{Def}{Hamiltonian graph}{}
-    A graph is said to be Hamiltonian if it has a Hamiltonian cycle.
+\section{Basics of Trees and Forests}
+\begin{Def}{Tree, Forest, Leaf}{tree}
+    A \textbf{tree} is a connected graph that contains no cycles. A \textbf{forest} is a collection of one or more trees. A vertex of degree 1 in a tree is called a \textbf{leaf}.
 \end{Def}
 
+As in nature, graph-theoretic trees come in many shapes and sizes. They can be thin $(P_{10})$ or thick $(K_{1,1000})$, tall $(P_{1000})$ or short $(K_{1}$ and $K_{2})$. You can check out how these graphs look by looking them up on google.
+
+There are some interesting names that can be assigned to certain graphs. Such as, $K_{1}$ is called a stump and $K_{2}$ is called a twig. Similarly, any $K_{1,3}$ graph is called a claw. There are more graphs, which have been assigned such interesting names, and the list is just a web search away from you.
 \begin{Thm}{}{}
-    For a connected graph $G$, TFAE (the following are equivalent) :
-    \begin{enumerate}
-        \item[(i)] $G$ is Eulerian.
-        \item[(ii)] Every vertex of $G$ has even degree.
-        \item[(iii)] The edges of $G$ can be partitioned into edge-disjoint cycles.
-    \end{enumerate}
-\end{Thm}
-The proof of this theorem is intuitive and are left as an exercise for the reader. It will be nice if you try to prove part (iii) and you can send your proofs on the group.
-\begin{cor}
-    The connected graph $G$ contains an Eulerian trail iff there are at most $2$ vertices of odd degree.
-\end{cor}
-
-Now, we state two very important theorems that will be used both in our Random Graphs WRP as well as in many graph theoretic problems that you may encounter in future.
-
-\begin{Thm}{Dirac's theorem}{}
-    Let, $G$ be a graph of order $n \ge 3$. If $\delta(G) \ge \frac{n}{2}$, then $G$ is Hamiltonian.
+    A tree $T$ of order $n$ has $(n-1)$ edges.
 \end{Thm}
 \begin{proof}
-    Suppose $G$ is a counterexample to the theorem and $G$ be such a graph with maximal number of edges i.e., addition of an edge to $G$ creates a cycle.  Let $v \nsim w$ and hence $G \cup (v,w)$ will contain a Hamilton cycle $v = v_1v_2\ldots v_n=w,v$. Thus $v_1v_2\ldots v_n$ is a simple path. Define sets $S_v \coloneqq \{ i : v \sim v_{i+1} \}$ and $S_w \coloneqq \{ i : w \sim v_i\}$. Since $\delta(G) \geq n/2$, $|S_v|, |S_w| \geq n/2$ and further $S_v, S_w \subset \{1,\ldots,n-1\}$. Hence $S_v \cap S_w \neq \emptyset$ and assume that $i_0 \in S_v \cap S_w$. Then $v = v_1v_2\ldots v_{i_0}w=v_nv_{n-1}\ldots v_{i_0+1}v_1=v$ is a Hamiltonian circuit in $G$, contradicting our assumption.
+    We use induction to prove this theorem.\\
+    Base Case: For $n=1$ the only tree is the stump $(K_{1})$, and it of course has $0$ edges.\\
+    Induction Hypothesis:  Assume that the result is true for all trees of order less than $k$.\\
+    Inductive Step: Let, $T$ be a tree of order $k$. Choose some edge of $T$ and call it $e$. Since $T$ is a tree, it must be that $T-e$ is disconnected with two connected components that are trees themselves. Say that these two components of $T-e$ are $T_{1}$ and $T_{2}$, with orders $k_{1}$ and $k_{2}$, respectively. Thus, $k_{1}$ and $k_{2}$ are less than $n$ and $k_{1} + k_{2} = k$.\\
+    Since $k_{1} < k$, the theorem is true for $T_{1}$. Thus $T_{1}$ has $k_{1}-1$ edges. Similarly, $T_{2}$ has $k_{2}-1$ edges. Now, since $E(T)$ is the disjoint union of $E(T_1)$, $E(T_2)$, and $\{e\}$, we have
+    \begin{align*}
+        |E(T)|
+         & = (k_{1}-1) + (k_{2}-1) + 1 \\
+         & = k_{1} + k_{2} - 1         \\
+         & = k-1
+    \end{align*}
+    Hence, a tree $T$ of order $n$ has $n - 1$ edges.
 \end{proof}
 
-\begin{Thm}{Ore's theorem}{}
-    Let, $G$ be a graph of order $n \ge 3$. If $deg(x)+deg(y) \ge n$, then $\forall$ pairs of non-adjacent vertices $x,y$, then $G$ is Hamiltonian.
-\end{Thm}
+The next two theorems can be trivially proved by using the idea of the preceding theorem and so are left as an exercise for the reader. But before stating them we need to define some terminology.
 
-The proof of this theorem is left as an exercise to the reader. You can make use of Dirac's theorem as well as the approach used in it's proof to prove Ore's theorem. We encourage you to share your proof in the group.\\
-Next, we define some very useful terminologies that will be of essence.\\
+We denote the number of connected components in a graph $ G $ by $\beta_{0}(G)$.
 
-\begin{Def}{Independent sets and covers}{} \index{independent sets} \index{cover}
-    An {\em independent set of vertices} is $S \subset V$ such that no two vertices in $S$ are adjacent. An {\em independent set of edges} is $E' \subset E$ such that no two edges in $E'$ share a common end vertex. A subset of vertices $S \subset V$ is a {\em vertex cover} if every edge in $G$ is incident to at least one vertex in $S$. An {\em edge cover} is a set of edges $E' \subset E$ such that every vertex is contained in at least one edge in $E'$.
-\end{Def}
-\begin{Def}{Independence number and cover number}{}
-    %
-    \begin{eqnarray*}
-        \alpha(G) & = & \max \{|S| : S \, \mbox{independent vertex set} \}. \\
-        \alpha'(G) & = & \max \{|M| : M \, \mbox{independent edge set} \}. \\
-        \beta(G) & = & \min \{|S| : S \, \mbox{vertex cover} \}.  \\
-        \beta'(G) & = & \min \{|E'| : E' \, \mbox{edge cover} \}.
-    \end{eqnarray*}
-\end{Def}
-
-Now we will state a very interesting theorem which relates the Hamiltonicity of a graph with it's connectivity and independence number.
-
-\begin{Thm}{}{}
-    Let, $G$ be a connected graph of order $n \ge 3$ with vertex connectivity $\kappa(G)$ and independence number $\alpha(G)$. If $\kappa(G) \ge \alpha(G)$, then G is Hamiltonian.
-\end{Thm}
-You can skip the proof of this theorem if you want, as the proof would not be a crucial part of our WRP.
-\begin{proof}
-    If $G$ is as described, then $\kappa(G) \ge 2$, as if $\kappa(G)=1$, then $\alpha(G)=1$ and thus $G$ is either $K_1$ or $K_2$, contradicting the fact that $n \ge 3$.\\
-    Let $C$ be a longest cycle in $G$. Suppose that $C$ is not a Hamiltonian cycle, and let $v$ be a vertex of $G$ that is not on $C$. Let, $H$ be the connected component of $G-V(C)$ containing vertex $v$.\\
-    $V(C)=\{c_1,c_2,\dots,c_r\}$\\
-    The vertex of $H$ adjacent to $c_i$ is denoted by $h_i$. The vertex which is the immediate clockwise successor of $c_i$ is denoted by $d_i$.\\
-    Following these, we can make some observations:\\
-    \begin{enumerate}
-        \item[(i)] It must be that $r \ge \kappa(G)$. If the vertices $V(C)$ were removed from $G$, then $H$ would be disconnected from the rest of the graph. Since $\kappa(G)$ is the size of the smallest cut set, it follows that $r \ge \kappa(G) \ge 2$.
-        \item[(ii)] No two of the vertices in the set $V(C)$ are consecutive vertices on $C$. To see this, suppose that there is some $i$ such that $c_i$ and $c_{i+1}$ are consecutive vertices on $C$. Let, $P$ be a path from $h_i$ to $h_{i+1}$ in $H$, and consider the cycle formed by replacing the edge $c_ic_{i+1}$ on $C$ with the path $c_i, [h_i, h_{i+1}]_{P} , c_{i+1}$. This cycle is longer than our maximal cycle $C$, a contradiction. This observation implies that the sets ${c_1, c_2,\dots,c_r}$ and ${d_1, d_2,\dots,d_r}$ are disjoint.
-        \item[(iii)] For each $i (1 \le i \le r)$, $d_i$ is not adjacent to $v$. To see this, suppose $d_{i}v \in E(G)$ for some $i$, and let $Q$ be a path from $h_i$ to $v$ in $H$. In this case, the cycle formed by replacing the edge $c_{i}d_{i}$ on $C$ with the path $c_{i}, [h_{i}, v]_{Q}, d_{i}$ is longer than $C$, again a contradiction.
-    \end{enumerate}
-    Now, let $S = {v,d_1, d_2,...,d_r}$. The first observation above implies that $|S| \ge \kappa(G)+1 > \alpha(G)$. This means that some pair of vertices in $S$ must be adjacent. Our third observation implies that $d_i$ must be adjacent to $d_j$ for some $i<j$. If $R$ is a path from $h_i$ to $h_j$ in $H$, then the cycle $c_i, [h_i, h_j]_{R}, [c_j , d_i]_{C^-} , [dj , ci]_{C^+}$ is a longer cycle than $C$. Our assumption that $C$ was not a Hamiltonian cycle has led to a contradiction and thus, $C$ is indeed a Hamiltonian cycle.
-\end{proof}
-
-Next, we introduce the idea of forbidden subgraphs. The absence of any particular forbidden subgraph $H$ in a graph $G$, gives $G$ some ``nice'' properties. This concept of forbidden subgraphs will be very crucial in understanding and checking for planarity of graphs. Here, we will relate forbidden subgraphs to Hamiltonicity. For the next two theorems, you may skip the proofs if you wish.
-
-\begin{Thm}{}{}
-    If $G$ is a $2$-connected, $\{K_{1,3}, Z_{1}\}$-free graph, then $G$ is Hamiltonian
+\begin{Thm}{}{forest}
+    If $F$ is a forest of order $n$, then $F$ has $(n-\beta_{0}(G))$ edges.
 \end{Thm}
 \begin{proof}
-    Suppose $G$ is $2$-connected and ${K_{1,3}, Z_1}$-free, and let $C$ be a longest cycle in $G$. If $C$ is not a Hamiltonian cycle, then there must exist a vertex $v$, not on $C$, which is adjacent to a vertex, say $w$, on $C$. Let $a$ and $b$ be the immediate predecessor and successor of $w$ on $C$.\\
-    A longer cycle would exist if either $a$ or $b$ were adjacent to $v$, and so it must be that both $a$ and $b$ are nonadjacent to $v$. Now, if $a$ is not adjacent to $b$, then the subgraph induced by the vertices ${w,v,a,b}$ is $K_{1,3}$, and we know that $G$ is $K_{1,3}$-free. So it must be that $ab \in E(G)$. But if this is the case, then the subgraph induced by ${w,v,a,b}$ is $Z_1$, a contradiction. Therefore, it must be that $C$ is a Hamiltonian cycle.
+    Easy exercise.
 \end{proof}
 
-\begin{Thm}{}{}
-    \label{ref:1}
-    Let, $G$ be a $\{K_{1,3}, N\}$-free graph. Then:\\
-    \begin{enumerate}
-        \item If $G$ is connected, then $G$ is traceable.
-        \item If $G$ is $2$-connected, then $G$ is Hamiltonian.
-    \end{enumerate}
+\begin{Thm}{Characterization of tree}{char:tree}
+    For an $n$-vertex graph $G$ (with $n > 1$), the following are equivalent (and characterize the trees with $n$ vertices).
+    \begin{itemize}
+        \item $G$ is connected and has no cycles.
+        \item $G$ is connected and has $n - 1$ edges.
+        \item $G$ has $n - 1$ edges and no cycles.
+        \item For $u, v \in V(G)$, $G$ has exactly one $u, v$-path.
+    \end{itemize}
 \end{Thm}
 
-The proof of the second part follows directly from theorem \ref{ref:1}. The proof of the first part is also simple and the only obstacle that may arise is understanding what we mean by traceable. A traceable graph refers to a graph that has a Hamiltonian path.
-\begin{figure}[htbp]
-    \tikzset{every picture/.style={line width=0.75pt}}
-    \begin{center}
-        \begin{tikzpicture}[x=0.65pt,y=0.65pt,yscale=-0.5,xscale=0.5]
-            \draw  (326,92) -- (399,202.41) ;
-            \draw  (326,92) -- (254,202.41) ;
-            \draw  (254,202.41) -- (399,202.41) ;
-            \draw  (327,18.41) -- (326,92) ;
-            \draw  (474,249.41) -- (399,202.41) ;
-            \draw  (182,246.41) -- (254,202.41) ;
-        \end{tikzpicture}
-    \end{center}
-    \caption{This graph is represented by \textbf{N}}
-\end{figure}
+\begin{Thm}{}{}
+    If $T$ is a tree of order $n \ge 2$, then $T$ has atleast two leaves.
+\end{Thm}
+\begin{proof}
+    Use Theorem \ref{th:deg:edge} and Theorem \ref{th:char:tree} to prove this.
+\end{proof}
+
+\section{Subgraph of Trees or Trees as Subgraphs}
+\begin{Thm}{}{}
+    In any tree, the center is either a single vertex or a pair of adjacent vertices.
+\end{Thm}
+\begin{proof}
+    Given a tree $T$, we form a sequence of trees as follows. Let $T_0 = T$. Let, $T_1$ be the graph obtained from $T_0$ by deleting all of its leaves. Note here that $T_1$ is also a tree. Let, $T_2$ be the tree obtained from $T_1$ by deleting all of the leaves of $T_1$. In general, for as long as it is possible, let $T_j$ be the tree obtained by deleting all of the leaves of $T_{j-1}$. Since $T$ is finite, there must be an integer $r$ such that $T_r$ is either $K_1$ or $K_2$.\\
+    Consider now a consecutive pair $T_i$, $T_{i+1}$ of trees from the sequence $T=T_0, T_1, \dots, T_r$. Let, $v$ be a non-leaf of $T_i$. In $T_i$, the vertices that are at the greatest distance from $v$ are leaves of $T_i$. This means that the eccentricity of $v$ in $T_{i+1}$ is one less than the eccentricity of $v$ in $T_i$. Since this is true for all non-leaves of $T_i$, it must be that the center of $T_{i+1}$ is exactly the same as the center of $T_i$.\\
+    Therefore, the center of $T_r$ is the center of $T_{r-1}$, which is the center of $T_{r-2}, \dots, $ which is the center of $T_0=T$. Since, $T_r$ is either $K_1$ or $K_2$, the proof is complete.
+\end{proof}
+
+We will now add consider trees as subgraphs of graphs, that may or may not be trees.
+
+\begin{Thm}{}{}
+    Let $T$ be a tree with $k$ edges. If $G$ is a graph whose minimum degree satisfies $\delta(G) \ge k$, then $G$ contains $T$ as a subgraph. Alternatively, $G$ contains every tree of order at most $\delta(G) + 1$ as a subgraph.
+\end{Thm}
+\begin{proof}
+    We induct on $k$. If $k=0$, then $T=K_{1}$, and it is clear that $K_{1}$ is a subgraph of any graph. Further, if $k=1$, then $T=K_{2}$, and $K_{2}$ is a subgraph of any graph whose minimum degree is $1$. Assume that the result is true for all trees with $k-1$ edges $(k \ge 2)$, and consider a tree $T$ with exactly $k$ edges. We know that $T$ contains at least two leaves. Let, $v$ be one of them, and let, $w$ be the vertex that is adjacent to $v$. Consider the graph $T-v$. Since $T-v$ has $k-1$ edges, the induction hypothesis applies, so $T-v$ is a subgraph of $G$.
+
+    We can think of $T-v$ as actually sitting inside of $G$. Now, since $G$ contains at least $k+1$ vertices and $T-v$ contains $k$ vertices, there exist vertices of $G$ that are not a part of the subgraph $T-v$. Further, since the degree in $G$ of $w$ is at least $k$, there must be a vertex $u$ not in $T-v$ that is adjacent to $w$. The subgraph $T-v$ together with $u$ forms the tree $T$ as a subgraph of $G$.
+\end{proof}
+
+\begin{Def}{Spanning Tree}{}
+    Given a graph $G$, and a subgraph $T$, we say that $T$ is a spanning tree of $G$, if $T$ is a tree that contains every vertex of $G$.
+\end{Def}
+
+\begin{Thm}{Cayley's Tree formula}{}
+    There are $n^{n-2}$ distinct labeled trees of order $n$. In other words, the number of spanning trees of $K_{n}$ is $n^{n-2}$.
+\end{Thm}
+
+%The next parts of this chapter are not required for the Random Graphs WRP.
 
 \end{document}
