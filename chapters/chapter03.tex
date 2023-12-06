@@ -131,4 +131,29 @@ The proof of the second part follows directly from theorem \ref{ref:1}. The proo
     \caption{This graph is represented by \textbf{N}}
 \end{figure}
 
+\begin{Thm}{Mantel's theorem, 1907}{}\index{Mantel's theorem}
+    If $G$ is a graph on $n$ vertices with no triangle then $|E| \leq \lfloor n^2/4 \rfloor $. Equivalently, if $|E| > n^2/4$, then $g(G) = 3$.
+\end{Thm}
+\begin{proof}
+    Let us divide the problem into 2 cases, $n=2k$ and $n=2k+1$. 
+    \begin{enumerate}
+        \item[Case 1:] For n=2k, $\lfloor n^2/4 \rfloor = k^2$.\\
+        The theorem holds true for $k=2$ or $n=4$. Let, the theorem be true for all $k \le q$.\\
+        Now, we consider $k=q+1$ or $n=2q+2$. Let, the vertex set be $V$ and we consider 2 vertices $x,y \in V$, such that, $x \sim y$. If among the vertices $V\setminus\{x,y\}$, we have more than $q^2$ edges then a triangle exists and we are done. Let, us assume that there exists no triangle among these vertices $V\setminus\{x,y\}$, then there are atmost $q^2$ edges among these vertices. Now, we have $(q+1)^2+1-q^2-1=2q+1$ edges more to be put to use. These edges are drawn from either of $x$ or $y$ to the vertices $V\setminus\{x,y\}$. Thus, there exists atleast one vertex $v \in V\setminus\{x,y\}$, such that, $x \sim v$ and $y \sim v$ and thus we get our triangle.
+        \item[Case 2:] For n=2k+1, $\lfloor n^2/4 \rfloor = k^2+k$.\\
+        The theorem holds true for $k=1$ or $n=3$. Let, the theorem be true for all $k \le q$.\\
+        Now, we consider $k=q+1$ or $n=2q+3$. Let, the vertex set be $V$ and we consider 2 vertices $x,y \in V$, such that, $x \sim y$. If among the vertices $V\setminus\{x,y\}$, we have more than $q^2+q$ edges then a triangle exists and we are done. Let, us assume that there exists no triangle among these vertices $V\setminus\{x,y\}$, then there are atmost $q^2+q$ edges among these vertices. Now, we have at least $(q+1)^2+(q+1)+1-q^2-q-1=2q+2$ edges more to be put to use. These edges are drawn from either of $x$ or $y$ to the vertices $V\setminus\{x,y\}$. Thus, there exists atleast one vertex $v \in V\setminus\{x,y\}$, such that, $x \sim v$ and $y \sim v$ and thus we get our triangle.
+    \end{enumerate}
+\end{proof}
+
+\begin{Thm}{Turan, 1941}{}\index{Turan's theorem}
+    If a simple graph on $n$ vertices has no complete subgraph $K_p$, then $|E| \leq T(n,k) := \frac{(k-2)n^2 - r(k-1-r)}{2(k-1)}$ where $r \equiv n(\mod k-1)$. 
+\end{Thm}
+\begin{proof}
+    Let $t$ be such that $n = t(k-1) + r$.  We will prove by induction on $t$. If $t = 0$, then $n  = r, T(n,k) = n(n-1)/2$ and the theorem trivially holds as $n \leq k - 1$.  Now, consider a graph $G$ on $n$ vertices with no $K_k$ subgraph (i.e., a subgraph isomorphic to $K_k$) and let $G$ have the maximum number of edges subject to these constraints. Hence, $G$ contains a subgraph $H$ isomorphic to $K_{k-1}$. If not, one can add an edge to $G$ without creating a $K_k$ subgraph and so contradicting its maximality. The vertices $V - H$ are joined to at most $k-2$ vertices in $H$. Since $|V - H| = n - k +1 = (t-1)(k-1) + r$ and the induced subgraph $\langle V - H\rangle$ also does not contain a $K_k$ subgraph, by induction hypothesis, $|E(\langle V-H\rangle)| \leq T(n-k+1,k)$. Thus, we have that
+    %
+    $$ |E(G)| \leq T(n-k+1,k) + (n-k+1)(k-2) + \binom{k-1}{2}$$
+    %
+    and one can easily verify that the RHS is equal to $T(n,k)$. 
+\end{proof}
 \end{document}
