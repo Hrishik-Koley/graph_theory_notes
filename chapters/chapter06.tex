@@ -7,7 +7,15 @@
 \setcounter{equation}{0}
 \setcounter{figure}{0}
 
-A graph $G$ is said to be planar if it can be drawn in the plane in such a way that pairs of edges intersect only at vertices, if at all. If $G$ has no such representation, $G$ is called nonplanar. A drawing of a planar graph $G$ in the plane in which edges intersect only at vertices is called a planar representation (or a planar embedding) of $G$.
+A graph $G$ is said to be planar if it can be drawn in the plane in such a way that pairs of edges intersect only at vertices, if at all. If $G$ has no such representation, $G$ is called nonplanar. A drawing of a planar graph $G$ in the plane in which edges intersect only at vertices is called a planar representation (or a planar embedding) of $G$. More precisely,
+
+\begin{Def}{Planar Graph}{planar}
+    A graph $G=(V,E)$ is called a planar graph if there exists an injection $\phi: V \to \R^{2}$, and corresponding to each edge \(\qty{i,j} \in E\) there exists a continuous curve $\gamma_{ij} : [0, 1] \to \R^2$ such that
+    \[\phi(i) = \gamma(0) \text{ and } \phi(j) = \gamma(1)\]
+    and for any two edges \(e_1, e_2 \in E\)
+    \[\gamma_{e_1}([0,1]) \cap \gamma_{e_2}([0,1]) = \phi(e_1 \cap e_2)\]
+    having cardinality atmost 2.
+\end{Def}
 
 If three or more edges bound a portion of a graph then we call it a region. In figure \ref{ref:regions}, $R_1, R_2, \dots, R_7$ are regions in the graph. An edge $e$ bounds a region $R$, if it comes in contact with $R$. We denote the bound degree of $R$ by $b(R)$ and define it as the number of edges that bound region $R$.
 
