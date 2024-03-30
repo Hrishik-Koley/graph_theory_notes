@@ -9,13 +9,13 @@
 
 \section{Matchings}
 
-\begin{Def}{Matching}{matching} \index{Matching}\index{Perfect Matching}
+\begin{Def}{Matching}{matching}
     A subset $M$ of edges is said to be \textbf{matching} if no two edges are incident on any vertex or equivalently, every vertex is contained in at most one edge. A {complete matching} $M$ on a subset $S \subset V$ is a matching that contains all the vertices in $S$. A \textbf{perfect matching} is a complete matching on $G$.
 \end{Def}
 
 Alternatively one can consider a matching of a graph $M$ as a subgraph of $G$ such that $d_M(v) = 1$ for all $v \in V(M)$. A matching is perfect if $M$ is spanning. A vertex $v$ is said to be {\em saturated} if $v \in M$ and else {\em unsaturated}. For a subset $S \subset V$, $N(S) = \bigcup_{v \in S}N(v).$
 
-\begin{Thm}{Hall's marriage theorem}{} \index{Hall's marriage theorem}
+\begin{Thm}{Hall's marriage theorem}{}
     Let $G$ be a bi-partite graph with the two vertex sets being $V_1,V_2$.  Then there exists a complete matching on $V_1$ iff $|N(S)| \geq |S|$ for all $S \subset V_1$.
 \end{Thm}
 
@@ -35,7 +35,7 @@ Alternatively one can consider a matching of a graph $M$ as a subgraph of $G$ su
     Set $V'_2 := V_2 \cup [d]$. Define $G'$ with vertex set as $V_1 \sqcup V'_2$ and edge set as $E(G) \cup (V_1 \times [d])$. Then, it is easy to see that Hall's condition is true on $G'$ and hence there is a complete matching $M$ of $V_1$ in $G'$. Now, if we remove the edes in $M$ incident on $[d]$, we get a matching with at least $|V_1| - d$ edges as required.
 \end{proof}
 
-\begin{Def}{Factor of a graph \index{factor}}{}
+\begin{Def}{Factor of a graph}{}
     Given a graph $G$,  a factor of $G$ is a spanning subgraph.  Equivalently,  a subgraph $H$ is said to be a factor (of $G$) if $V(H) = V(G)$. An $r$-factor is a factor that is $r$-regular.
 \end{Def}
 
@@ -59,14 +59,14 @@ As for the second inequality, observe that to cover vertices of an independent s
 \begin{lem}
     Let $G$ be a graph. $S \subset V$ is an independent set iff $S^c$ is a vertex cover. As a corollary, we get $\alpha(G) + \beta(G) = n = |V|.$
 \end{lem}
-\begin{Thm}{Konig-Egervary theorem}{} \index{Konig-Egervary theorem}
+\begin{Thm}{Konig-Egervary theorem}{}
     For a bi-partite graph, $\alpha'(G) = \beta(G)$.
 \end{Thm}
 \begin{proof}
     We will show that for a minimum vertex cover $Q$, there exists a matching of size at least $|Q|$. Partition $Q$ into $A := Q \cap V_1$ and $B := Q \cap V_2$. Let $H$ and $H'$ be induced subgraphs on $A \sqcup (V_2 - B)$ and $(V_1 - A) \sqcup B$ respectively. If we show that there is a complete matching on $A$ in $H$ and a complete matching on $B$ in $H'$, we have a matching of size at least $|A| + |B|$ ($= |Q|$) in $G$.  Also, note that it suffices to show that there is a complete matching on $A$ in $H$ because we can reverse the roles of $A$ and $B$ apply the same argument to $B$ as well. \\
     Since $A \cup B$ is a vertex cover, there cannot be an edge between $V_1 - A$ and $V_2 - B$. Suppose for some $S \subset A$, we have that $|N_H(S)| < |S|$. Since $N_H(S)$ covers all edges from $S$ that are not incident on $B$, $Q' := Q - S + N_H(S)$ is also a vertex cover. By choice of $S$, $Q'$ is a smaller vertex cover than $Q$ contradicting that $Q$ is minimum.  Hence, we have that Hall's condition holds true for $A$ in $H$. And by the arguments in the previous paragraph, the proof is complete.
 \end{proof}
-\begin{Thm}{Gallai, 1959}{} \index{Gallai theorem}
+\begin{Thm}{Gallai, 1959}{}
     If $G$ is a graph without isolated vertices, then $\alpha'(G) + \beta'(G) = n = |V|.$
 \end{Thm}
 
@@ -85,11 +85,11 @@ As a corollary, we get K\"{o}nig's result : if $G$ is bi-partite graph without i
 
 \section{Augmenting path}
 
-\begin{Def}{Augmenting path}{aug:path}\index{augmenting path}
+\begin{Def}{Augmenting path}{aug:path}
     Given a matching $M$, a $M$-alternating path $P$ is a path such that its edges alternate between $M$ and $M^c$.  A $M$-augmenting path is a $M$-alternating path whose end-vertices do not belong to $M$.
 \end{Def}
 
-\begin{Thm}{Berge, 1957}{}\index{Berge theorem}
+\begin{Thm}{Berge, 1957}{}
     A matching $M$ in a graph is a maximum matching in $G$ iff $G$ has no $M$-augmenting path.
 \end{Thm}
 
@@ -117,7 +117,7 @@ As a corollary, we get K\"{o}nig's result : if $G$ is bi-partite graph without i
 \end{proof}
 Recall definition of graph factors.  For a graph $G$, let $o(G)$ denote the number of odd components of $G$. The next theorem that we will be stating has a long proof and you may skip it if you want.
 
-\begin{Thm}{Tutte's 1-factor theorem}{}\index{Tutte's factor theorem}
+\begin{Thm}{Tutte's 1-factor theorem}{}
     A graph has a $1$-factor iff $o(G-S) \leq |S|$ for all $S \subset V$.
 \end{Thm}
 \begin{proof}
